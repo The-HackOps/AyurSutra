@@ -1,97 +1,300 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}AyurSutra{% endblock %}</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     
+    <style>
+      /* --- FONT IMPORT --- */
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap');
+
+      /* --- GLOBAL STYLES --- */
+      html { scroll-behavior: smooth; }
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #F9F9F7; /* Default fallback */
+        color: #212529;
+        overflow-x: hidden;
+      }
+      h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; font-weight: 700; color: #2E7D32; }
+      .section-heading { text-align: center; margin-bottom: 4rem; }
+      .section-heading h2 { font-size: 3rem; }
+      .section-heading p { font-size: 1.2rem; color: #6c757d; }
+
+      /* --- HOMEPAGE-SPECIFIC BACKGROUND --- */
+      body.homepage-bg {
+        background: linear-gradient(-45deg, #e8f5e9, #fdfbf4, #e3f2fd, #f3e5f5);
+        background-size: 400% 400%;
+        animation: gradient 20s ease infinite;
+      }
+      @keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+      /* --- NAVBAR & HAMBURGER MENU --- */
+      .navbar {
+        transition: background-color 0.5s ease, box-shadow 0.5s ease;
+      }
+      .homepage-nav {
+        background-color: transparent !important;
+        box-shadow: none !important;
+      }
+      .navbar-brand img {
+  height: 65px; /* Bigger logo */
+  transition: all 0.3s ease;
+}
+      
+      .burger-menu-icon {
+        cursor: pointer; border: none; background: none; padding: 0;
+        z-index: 1001; /* Ensure it's above the nav-list */
+        margin-right: -15px; /* Move hamburger to the right */
+      }
+      .burger-menu-icon .line { width: 28px; height: 3px; background-color: #fff; margin: 5px 0; transition: all 0.4s ease; border-radius: 2px; }
+      .homepage-nav .burger-menu-icon .line { background-color: #2E7D32; } /* Darker on homepage */
+      .burger-menu-icon.toggle .line1 { transform: rotate(-45deg) translate(-6px, 6px); }
+      .burger-menu-icon.toggle .line2 { opacity: 0; }
+      .burger-menu-icon.toggle .line3 { transform: rotate(45deg) translate(-6px, -6px); }
+      
+      .nav-list {
+        position: fixed; top: 0; right: -100%; width: 320px; height: 100vh;
+        background-color: #1a1a1a; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; z-index: 1000;
+        transition: right 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+        padding-top: 50px; /* Offset for fixed header */
+      }
+      .nav-list.active { right: 0; }
+      .nav-list .nav-item { margin: 1rem 0; list-style: none; opacity: 0; transform: translateX(50px); transition: opacity 0.4s ease, transform 0.4s ease; }
+      .nav-list.active .nav-item { opacity: 1; transform: translateX(0); }
+      .nav-list.active .nav-item:nth-child(1) { transition-delay: 0.1s; }
+      .nav-list.active .nav-item:nth-child(2) { transition-delay: 0.2s; }
+      .nav-list.active .nav-item:nth-child(3) { transition-delay: 0.3s; }
+      .nav-list.active .nav-item:nth-child(4) { transition-delay: 0.4s; }
+      .nav-list.active .nav-item:nth-child(5) { transition-delay: 0.5s; }
+      .nav-list.active .nav-item:nth-child(6) { transition-delay: 0.6s; }
+      .nav-list .nav-link {
+        font-size: 1.2rem; text-transform: uppercase; color: #cecece; letter-spacing: 1.5px;
+        transition: color 0.3s, font-weight 0.3s, transform 0.3s;
+        display: inline-block; /* Required for transform on hover */
+      }
+      .nav-list .nav-link:hover { color: #fff; font-weight: 600; transform: scale(1.05); }
+      .nav-list .nav-item .btn {
+        background-color: #FB8C00; /* Distinct color for button */
+        color: white;
+        border-radius: 25px;
+        padding: 10px 25px;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+      .nav-list .nav-item .btn:hover { background-color: #E65100; transform: scale(1.05); }
+
+      /* --- GENERAL SECTION STYLING --- */
+      section {
+          padding: 6rem 0; /* Consistent vertical padding */
+          min-height: calc(100vh - 80px); /* Adjust for header/footer to keep one section in view */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+      #section1 { /* Hero section */
+          min-height: 100vh;
+      }
+      
+/* Find this */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.07);
+}
+
+/* !! ADD THIS NEW BLOCK BELOW !! */
+.panchakarma-card {
+    min-width: 200px;  /* Sets a minimum width */
+    min-height: 300px; /* Sets a minimum height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically centers content */
+    align-items: center; /* Horizontally centers content */
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+      .panchakarma-card:hover, .therapy-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(46, 125, 50, 0.2), 0 0 0 3px rgba(46, 125, 50, 0.1); /* Green glow + subtle border */
+      }
+      .panchakarma-card .icon, .therapy-card .icon { font-size: 3rem; margin-bottom: 1rem; }
+      
+      /* Specific card colors for Panchakarma */
+      .panchakarma-card.c-green { background-color: #E8F5E9; color: #2E7D32; }
+      .panchakarma-card.c-blue { background-color: #E3F2FD; color: #1565C0; }
+      .panchakarma-card.c-orange { background-color: #FFF3E0; color: #EF6C00; }
+      .panchakarma-card.c-purple { background-color: #F3E5F5; color: #6A1B9A; }
+      .panchakarma-card.c-red { background-color: #FFEBEE; color: #C62828; }
+
+      /* Specific card colors for More Therapies */
+      .therapy-card.t-teal { background-color: #E0F2F7; color: #00838F; } /* Shirodhara */
+      .therapy-card.t-amber { background-color: #FFF8E1; color: #FF8F00; } /* Abhyanga */
+      .therapy-card.t-lime { background-color: #F1F8E9; color: #558B2F; } /* Kati Basti */
+
+      /* --- SCROLL ANIMATIONS --- */
+      .fade-in-section {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .fade-in-section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* --- FOOTER --- */
+      .footer { background-color: transparent; color: #6c757d; padding: 2.5rem 1rem; text-align: center; }
+      .footer-nav-link {
+        color: #6c757d; text-decoration: none; margin: 0 1rem; font-weight: 600;
+        text-transform: uppercase; font-size: 0.9rem;
+        transition: color 0.3s, font-weight 0.3s, transform 0.3s;
+        display: inline-block; /* Required for transform on hover */
+      }
+      .footer-nav-link:hover { color: #2E7D32; font-weight: 700; transform: scale(1.05); }
+      .footer-coded-by { font-size: 1rem; margin-top: 1rem; }
+
+      /* --- Logo in Hamburger Menu --- */
+      .nav-list .nav-item .hamburger-logo {
+  height: 85px; /* Bigger hamburger logo */
+  width: auto;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+      .nav-list .nav-item .hamburger-logo:hover {
+        transform: scale(1.08);
+      }
+  /* --- BUBBLE ANIMATION --- */
+#section1 { position: relative; overflow: hidden; }
+.bubbles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+.bubble { position: absolute; bottom: -100px; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.15); border-radius: 50%; opacity: 0; animation: bubble-rise 25s infinite ease-in; }
+.bubble:nth-child(1){width:20px;height:20px;left:10%;animation-duration:15s;} .bubble:nth-child(2){width:25px;height:25px;left:20%;animation-duration:12s;animation-delay:2s;} .bubble:nth-child(3){width:15px;height:15px;left:35%;animation-duration:20s;animation-delay:4s;} .bubble:nth-child(4){width:50px;height:50px;left:50%;animation-duration:18s;animation-delay:1s;} .bubble:nth-child(5){width:35px;height:35px;left:65%;animation-duration:14s;animation-delay:3s;} .bubble:nth-child(6){width:45px;height:45px;left:80%;animation-duration:16s;animation-delay:5s;} .bubble:nth-child(7){width:30px;height:30px;left:90%;animation-duration:19s;}
+@keyframes bubble-rise { 0% { transform: translateY(0); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-1080px); opacity: 0; } }
+
+    </style>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
-  <body>
+</head>
+<body class="{% if request.endpoint == 'main.index' %}homepage-bg{% endif %}">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top {% if request.endpoint == 'main.index' %}homepage-nav{% else %}bg-success{% endif %}">
+            <div class="container d-flex justify-content-between align-items-center">
+                <a class="navbar-brand" href="{% if g.user %}{{ url_for('main.dashboard') }}{% else %}{{ url_for('main.index') }}{% endif %}">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AyurSutra Logo" class="navbar-brand-img">
+                </a>
+                <div class="d-flex align-items-center">
+                    <button class="burger-menu-icon" aria-label="Toggle navigation">
+                        <div class="line line1"></div>
+                        <div class="line line2"></div>
+                        <div class="line line3"></div>
+                    </button>
+                </div>
+            </div>
+        </nav>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm fixed-top">
-      <div class="container">
-        
-        <a class="navbar-brand" href="{% if g.user %}{{ url_for('main.dashboard') }}{% else %}{{ url_for('main.index') }}{% endif %}">
-          🌿 AyurSutra
+        <ul class="nav-list">
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('main.index') }}#">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Home" class="hamburger-logo">
         </a>
-        
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            {% if g.user %}
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('main.dashboard') }}">Dashboard ({{ g.user.first_name }})</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
-              </li>
-            {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-    </nav>
+    </li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#therapies">Panchakarma</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#more-therapies">More Therapies</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#philosophy">Our Philosophy</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#how-it-works">How It Works</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#contact">Contact</a></li>
+    <li class="nav-item" style="margin-top: 2rem;">
+        {% if g.user %}
+        <div class="cta"><a href="{{ url_for('auth.logout') }}" class="btn nav-link">Logout</a></div>
+        {% else %}
+        <div class="cta"><a href="{{ url_for('auth.register') }}" class="btn nav-link">Login / Sign Up</a></div>
+        {% endif %}
+    </li>
+</ul>
+    </header>
 
     <main>
-      {% block content_full_width %}{% endblock %}
-
-      <div class="container" style="padding-top: 70px;">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            {% for category, message in messages %}
-              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-        
-        {% block content_contained %}{% endblock %}
-      </div>
+        {% block content_full_width %}{% endblock %}
+        <div class="container" style="padding-top: 70px;">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}{% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">{{ message }}<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
+                {% endfor %}{% endif %}
+            {% endwith %}
+            {% block content_contained %}{% endblock %}
+        </div>
     </main>
 
     <footer class="footer">
-      <div class="container">
-        <div class="row g-4">
-          <div class="col-lg-4 col-md-6">
-            <h5>🌿 AyurSutra</h5>
-            <p>Your modern solution for holistic Panchakarma management.</p>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <h5>Our Location</h5>
-            <p>
-              123 Wellness Street<br>
-              Ayurveda Nagar, Delhi<br>
-              India
-            </p>
-            <a href="https://maps.google.com" target="_blank">Get Directions</a>
-          </div>
-          <div class="col-lg-4 col-md-12">
-            <h5>Contact Us</h5>
-            <p>Email: <a href="mailto:info@ayursutra.com">info@ayursutra.com</a></p>
-            <p>Phone: <a href="tel:+911234567890">+91 12345 67890</a></p>
-          </div>
+        <div class="footer-nav">
+    <a href="{{ url_for('main.index') }}#" class="footer-nav-link">Home</a>
+    <a href="{{ url_for('main.index') }}#therapies" class="footer-nav-link">Panchakarma</a>
+    <a href="{{ url_for('main.index') }}#more-therapies" class="footer-nav-link">More Therapies</a>
+    <a href="{{ url_for('main.index') }}#philosophy" class="footer-nav-link">Philosophy</a>
+    <a href="{{ url_for('main.index') }}#how-it-works" class="footer-nav-link">How It Works</a>
+    <a href="{{ url_for('main.index') }}#contact" class="footer-nav-link">Contact</a>
+</div>
+            <div class="footer-coded-by">
+                <p><i class="fas fa-code"></i> with <i class="fas fa-heart" style="color: #0add1b;"></i> by HackOps &copy; 2025</p>
+            </div>
         </div>
-      </div>
     </footer>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
-  </body>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hamburger Menu Logic
+            const burgerMenu = document.querySelector('.burger-menu-icon');
+            const navList = document.querySelector('.nav-list');
+            const navLinks = document.querySelectorAll('.nav-list .nav-item'); // Select items for animation delay
+
+            if (burgerMenu && navList) {
+                burgerMenu.addEventListener('click', () => {
+                    navList.classList.toggle('active');
+                    burgerMenu.classList.toggle('toggle');
+                });
+                navLinks.forEach(item => { // Changed to 'item'
+                    const link = item.querySelector('.nav-link');
+                    if (link) {
+                        link.addEventListener('click', () => {
+                            navList.classList.remove('active');
+                            burgerMenu.classList.remove('toggle');
+                        });
+                    }
+                });
+            }
+
+            // Scroll Animation Logic
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        // Optionally remove 'visible' class when out of view
+                        // entry.target.classList.remove('visible');
+                    }
+                });
+            }, { threshold: 0.15 }); // Adjust threshold as needed
+            document.querySelectorAll('.fade-in-section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Make sure first section is immediately visible (if it's the hero)
+            const firstSection = document.querySelector('#section1');
+            if (firstSection) {
+                firstSection.classList.add('visible');
+            }
+        });
+    </script>
+</body>
 </html>

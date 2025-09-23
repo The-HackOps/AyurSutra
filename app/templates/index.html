@@ -1,81 +1,151 @@
 {% extends 'layouts/base.html' %}
 
 {% block content_full_width %}
-
-<div class="gradient-background"> <div class="hero-section text-center" style="padding-top: 12rem; padding-bottom: 8rem;">
-  <div class="hero-section text-center" style="padding-top: 12rem; padding-bottom: 8rem;">
-    <div class="container">
-      <h1 class="display-4 fw-bold">Welcome to Your Healing Journey</h1>
-      <p class="fs-4 col-md-10 mx-auto text-muted">
-        Experience the ancient wisdom of Panchakarma with modern technology.
-      </p>
-      
-      {% if g.user %}
-        <a href="{{ url_for('main.dashboard') }}" class="btn btn-success btn-lg mt-3">Go to Your Dashboard</a>
-      {% else %}
-        <a href="{{ url_for('auth.register') }}" class="btn btn-outline-success btn-lg mt-3">Get Started</a>
-        <a href="{{ url_for('auth.login') }}" class="btn btn-outline-success btn-lg mt-3 ms-2">Login</a>
+  
+  {# Section 1: Welcome / Hero with Animated Background #}
+  <section id="section1" class="hero-section text-center fade-in-section">
+    <div class="bubbles">
+      <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+      <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+      <div class="bubble"></div>
+    </div>
+    <div class="container" style="z-index: 1; padding-top: 60px;">
+      <h1 class="display-3 fw-bold">Welcome to AyurSutra</h1>
+      <p class="fs-4 col-md-8 mx-auto text-muted">Experience the ancient wisdom of Panchakarma with modern technology.</p>
+      {% if not g.user %}
+        <a href="{{ url_for('auth.register') }}" class="btn btn-success btn-lg mt-3">Get Started</a>
       {% endif %}
     </div>
-  </div>
+  </section>
 
-  <div class="panchakarma-section my-5">
-    <div class="container">
-      <div class="row mb-4">
-        <div class="col-md-8 mx-auto text-center">
-          <h2 class="display-5">The Healing Art of Panchakarma</h2>
-          <p class="fs-5 text-muted">
-            Discover the five sacred cleansing therapies that have restored balance.
-          </p>
-        </div>
+  {# Section 2: Therapies (Panchakarma) #}
+  <section id="therapies" class="fade-in-section" style="background-color: #f0efe9;">
+    <div class="container py-5">
+      <div class="section-heading">
+        <h2>The Healing Art of Panchakarma</h2>
+        <p>Discover the five sacred cleansing therapies that have restored balance.</p>
       </div>
-      
-      <div class="row g-4">
-        <div class="col-lg col-md-6">
-          <div class="panchakarma-card bg-green-light">
-            <div class="icon" style="background-color: #C8E6C9;"><img src="https://img.icons8.com/fluency-systems-regular/48/2E7D32/leaf.png" alt="Leaf Icon"/></div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="panchakarma-card c-green">
+            <div class="icon"><i class="fas fa-leaf"></i></div>
             <h4>Vamana</h4>
-            <p class="text-muted small">Therapeutic emesis to eliminate excess Kapha dosha, treating respiratory and digestive disorders.</p>
+            <p class="text-muted small">Therapeutic emesis to eliminate excess Kapha dosha.</p>
           </div>
         </div>
-        <div class="col-lg col-md-6">
-          <div class="panchakarma-card bg-blue-light">
-            <div class="icon" style="background-color: #BBDEFB;">
-              <i class="fas fa-tint" style="color: #1E88E5; font-size: 40px;"></i>
-            </div>
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="panchakarma-card c-blue">
+            <div class="icon"><i class="fas fa-tint"></i></div>
             <h4>Virechana</h4>
-            <p class="text-muted small">Controlled purgation therapy to cleanse Pitta dosha, addressing liver disorders and skin conditions.</p>
+            <p class="text-muted small">Controlled purgation therapy to cleanse Pitta dosha.</p>
           </div>
         </div>
-        <div class="col-lg col-md-6">
-          <div class="panchakarma-card bg-orange-light">
-            <div class="icon" style="background-color: #FFECB3;">
-              <i class="fas fa-spa" style="color: #FB8C00; font-size: 40px;"></i>
-            </div>
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="panchakarma-card c-orange">
+            <div class="icon"><i class="fas fa-spa"></i></div>
             <h4>Basti</h4>
-            <p class="text-muted small">Medicated enema therapy to balance Vata dosha, treating neurological and joint disorders.</p>
+            <p class="text-muted small">Medicated enema therapy to balance Vata dosha.</p>
           </div>
         </div>
-        <div class="col-lg col-md-6">
-          <div class="panchakarma-card bg-purple-light">
-            <div class="icon" style="background-color: #E1BEE7;"><img src="https://img.icons8.com/fluency-systems-regular/48/8E24AA/head-profile.png" alt="Head Icon"/></div>
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="panchakarma-card c-purple">
+            <div class="icon"><i class="fas fa-head-side-virus"></i></div>
             <h4>Nasya</h4>
-            <p class="text-muted small">Nasal administration of medicines to treat head and neck disorders, enhancing mental clarity.</p>
+            <p class="text-muted small">Nasal administration of medicines for clarity.</p>
           </div>
         </div>
-        <div class="col-lg col-md-6">
-          <div class="panchakarma-card bg-red-light">
-            <div class="icon" style="background-color:#FFCDD2;"><img src="https://img.icons8.com/fluency-systems-regular/48/D32F2F/drop-of-blood.png" alt="Blood Drop Icon"/></div>
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="panchakarma-card c-red">
+            <div class="icon"><i class="fas fa-burn"></i></div>
             <h4>Raktamokshana</h4>
-            <p class="text-muted small">Bloodletting therapy to purify blood and treat skin diseases, hypertension, and inflammation.</p>
+            <p class="text-muted small">Bloodletting therapy to purify blood and treat skin diseases.</p>
           </div>
         </div>
-      </div>
-      
-      <div class="text-center mt-5">
-        <a href="{{ url_for('auth.register') }}" class="btn btn-success btn-lg">Start Your Healing Journey</a>
       </div>
     </div>
-  </div>
+  </section>
+
+  {# Section 3: More Therapies #}
+  <section id="more-therapies" class="fade-in-section">
+    <div class="container py-5">
+      <div class="section-heading">
+        <h2>Explore More Therapies</h2>
+        <p>Beyond Panchakarma, we offer a range of specialized Ayurvedic treatments.</p>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-4">
+          <div class="panchakarma-card t-teal h-100">
+            <div class="icon"><i class="fas fa-oil-can"></i></div>
+            <h4>Shirodhara</h4>
+            <p class="card-text text-muted">A continuous stream of warm oil on the forehead to calm the mind.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panchakarma-card t-amber h-100">
+            <div class="icon"><i class="fas fa-hand-holding-medical"></i></div>
+            <h4>Abhyanga</h4>
+            <p class="card-text text-muted">A full-body warm oil massage to improve circulation, detoxify, and relax.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panchakarma-card t-lime h-100">
+            <div class="icon"><i class="fas fa-prescription-bottle-alt"></i></div>
+            <h4>Kati Basti</h4>
+            <p class="card-text text-muted">A localized treatment using a dough dam to hold warm oil, relieving back pain.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  {# Section 4: Philosophy #}
+  <section id="philosophy" class="fade-in-section" style="background-color: #f0efe9;">
+    <div class="container py-5">
+      <div class="row align-items-center">
+        <div class="col-md-6 order-md-2 text-center">
+          <img src="{{ url_for('static', filename='img/philosophy-image.jpg') }}" class="img-fluid rounded-3 shadow-sm" alt="Woman meditating peacefully in nature">
+        </div>
+        <div class="col-md-6 order-md-1 pe-md-5">
+          <div class="section-heading text-center text-md-start">
+            <h2>Our Philosophy</h2>
+            <p>Balance for Body, Mind & Spirit</p>
+          </div>
+          <p class="text-muted text-center text-md-start">At AyurSutra, we believe that true wellness comes from harmony. Our approach combines the timeless wisdom of Ayurvedic principles with the precision of modern technology to provide a healing experience that is both authentic and accessible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {# Section 5: How It Works (RESTORED) #}
+  <section id="how-it-works" class="fade-in-section">
+    <div class="container py-5">
+      <div class="section-heading">
+        <h2>How AyurSutra Works</h2>
+        <p>A simple, streamlined process from booking to feedback.</p>
+      </div>
+      <div class="row text-center g-4">
+        <div class="col-md-3">
+          <div class="icon mb-3"><i class="fas fa-user-plus fa-3x text-success"></i></div>
+          <h5>1. Register & Profile</h5>
+          <p class="text-muted small">Quickly sign up and complete your basic health profile.</p>
+        </div>
+        <div class="col-md-3">
+          <div class="icon mb-3"><i class="fas fa-calendar-check fa-3x text-success"></i></div>
+          <h5>2. Book Your Therapy</h5>
+          <p class="text-muted small">Browse treatments and request an appointment in just a few clicks.</p>
+        </div>
+        <div class="col-md-3">
+          <div class="icon mb-3"><i class="fas fa-hand-holding-heart fa-3x text-success"></i></div>
+          <h5>3. Receive Care</h5>
+          <p class="text-muted small">Your practitioner confirms the session and you receive all necessary alerts.</p>
+        </div>
+        <div class="col-md-3">
+          <div class="icon mb-3"><i class="fas fa-chart-line fa-3x text-success"></i></div>
+          <h5>4. Track Your Progress</h5>
+          <p class="text-muted small">After your therapy, provide feedback and watch your wellness journey unfold.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
 {% endblock %}
