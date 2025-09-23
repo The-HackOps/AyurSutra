@@ -1,0 +1,56 @@
+{% extends 'layouts/practitioner_base.html' %}
+
+{% block dashboard_content %}
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Progress for {{ patient.first_name }} {{ patient.last_name }}</h1>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-header">
+      Improvement Rating Over Time
+    </div>
+    <div class="card-body">
+      <div x-data="{ labels: [], data: [] }" 
+           x-init="
+             fetch('{{ url_for('practitioner.patient_progress_data', patient_id=patient_id) }}')
+               .then(response => response.json())
+               .then(json => {
+                 labels = json.labels;
+                 data = json.data;
+                 initChart(labels, data);
+               })
+           ">
+        <canvas id="myProgressChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // This is the same Chart.js logic from the patient's page
+    function initChart(labels, data) {
+      const ctx = document.getElementById('myProgressChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Improvement Rating (1-5)',
+            data: data,
+            borderColor: '#198754',
+            backgroundColor: 'rgba(25, 135, 84, 0.1)',
+            fill: true,
+            tension: 0.1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 5
+            }
+          }
+        }
+      });
+    }
+  </script>
+{% endblock %}

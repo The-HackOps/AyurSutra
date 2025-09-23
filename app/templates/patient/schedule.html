@@ -1,0 +1,61 @@
+{% extends 'layouts/patient_base.html' %}
+
+{% block dashboard_content %}
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">My Schedule</h1>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-header">
+      Your Appointments
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Date & Time</th>
+              <th scope="col">Therapy</th>
+              <th scope="col">Practitioner</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th> </tr>
+          </thead>
+          <tbody>
+            {% if appointments %}
+              {% for appt in appointments %}
+                <tr>
+                  <td>{{ appt.start_time.strftime('%Y-%m-%d at %I:%M %p') }}</td>
+                  <td>{{ appt.therapy_name }}</td>
+                  <td>Dr. {{ appt.doc_first_name }} {{ appt.doc_last_name }}</td>
+                  <td>
+                    {% if appt.status == 'pending' %}
+                      <span class="badge bg-warning text-dark">{{ appt.status|capitalize }}</span>
+                    {% elif appt.status == 'confirmed' %}
+                      <span class="badge bg-success">{{ appt.status|capitalize }}</span>
+                    {% elif appt.status == 'cancelled' %}
+                      <span class="badge bg-danger">{{ appt.status|capitalize }}</span>
+                    {% else %}
+                      <span class="badge bg-secondary">{{ appt.status|capitalize }}</span>
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if appt.status == 'confirmed' %}
+                      <a href="{{ url_for('patient.feedback', appointment_id=appt.id) }}" class="btn btn-outline-success btn-sm">
+                        Leave Feedback
+                      </a>
+                    {% else %}
+                      <span class="text-muted">No actions</span>
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            {% else %}
+              <tr>
+                <td colspan="5" class="text-center">You have no appointments.</td> </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'layouts/patient_base.html' %}
+
+{% block dashboard_content %}
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Leave Feedback</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card shadow-sm">
+        <div class="card-header">
+          Feedback for <strong>{{ appointment.therapy_name }}</strong> on 
+          <strong>{{ appointment.start_time.strftime('%Y-%m-%d') }}</strong>
+        </div>
+        <div class="card-body">
+          <form method="POST">
+            <div class="mb-3">
+              <label class="form-label">How would you rate your improvement?</label>
+              <div class="d-flex">
+                {% for i in range(1, 6) %}
+                <div class="form-check me-3">
+                  <input class="form-check-input" type="radio" name="rating" id="rating{{i}}" value="{{i}}" required>
+                  <label class="form-check-label" for="rating{{i}}">{{i}}</label>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="improvements" class="form-label">What improvements did you notice?</label>
+              <textarea class="form-control" id="improvements" name="improvements" rows="3" placeholder="e.g., 'Better sleep', 'Less pain', etc."></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="symptoms" class="form-label">Did you experience any symptoms or side effects?</label>
+              <textarea class="form-control" id="symptoms" name="symptoms" rows="3" placeholder="e.g., 'Headache', 'Tiredness', etc."></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-success">Submit Feedback</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

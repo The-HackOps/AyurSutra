@@ -1,0 +1,47 @@
+{% extends 'layouts/patient_base.html' %}
+
+{% block dashboard_content %}
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Book a New Therapy</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card shadow-sm">
+        <div class="card-header">
+          Appointment Details
+        </div>
+        <div class="card-body">
+          <form method="POST">
+            <div class="mb-3">
+              <label for="therapy_id" class="form-label">Select Therapy</label>
+              <select class="form-select" id="therapy_id" name="therapy_id" required>
+                <option value="" disabled selected>-- Choose a therapy --</option>
+                {% for therapy in therapies %}
+                  <option value="{{ therapy.id }}">{{ therapy.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="practitioner_id" class="form-label">Select Practitioner</label>
+              <select class="form-select" id="practitioner_id" name="practitioner_id" required>
+                <option value="" disabled selected>-- Choose a practitioner --</option>
+                {% for doc in practitioners %}
+                  <option value="{{ doc.id }}">Dr. {{ doc.first_name }} {{ doc.last_name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="start_time" class="form-label">Requested Date & Time</label>
+              <input type="datetime-local" class="form-control" id="start_time" name="start_time" required>
+            </div>
+            
+            <button type="submit" class="btn btn-success">Request Appointment</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

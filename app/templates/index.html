@@ -1,0 +1,81 @@
+{% extends 'layouts/base.html' %}
+
+{% block content_full_width %}
+
+<div class="gradient-background"> <div class="hero-section text-center" style="padding-top: 12rem; padding-bottom: 8rem;">
+  <div class="hero-section text-center" style="padding-top: 12rem; padding-bottom: 8rem;">
+    <div class="container">
+      <h1 class="display-4 fw-bold">Welcome to Your Healing Journey</h1>
+      <p class="fs-4 col-md-10 mx-auto text-muted">
+        Experience the ancient wisdom of Panchakarma with modern technology.
+      </p>
+      
+      {% if g.user %}
+        <a href="{{ url_for('main.dashboard') }}" class="btn btn-success btn-lg mt-3">Go to Your Dashboard</a>
+      {% else %}
+        <a href="{{ url_for('auth.register') }}" class="btn btn-outline-success btn-lg mt-3">Get Started</a>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-outline-success btn-lg mt-3 ms-2">Login</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="panchakarma-section my-5">
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col-md-8 mx-auto text-center">
+          <h2 class="display-5">The Healing Art of Panchakarma</h2>
+          <p class="fs-5 text-muted">
+            Discover the five sacred cleansing therapies that have restored balance.
+          </p>
+        </div>
+      </div>
+      
+      <div class="row g-4">
+        <div class="col-lg col-md-6">
+          <div class="panchakarma-card bg-green-light">
+            <div class="icon" style="background-color: #C8E6C9;"><img src="https://img.icons8.com/fluency-systems-regular/48/2E7D32/leaf.png" alt="Leaf Icon"/></div>
+            <h4>Vamana</h4>
+            <p class="text-muted small">Therapeutic emesis to eliminate excess Kapha dosha, treating respiratory and digestive disorders.</p>
+          </div>
+        </div>
+        <div class="col-lg col-md-6">
+          <div class="panchakarma-card bg-blue-light">
+            <div class="icon" style="background-color: #BBDEFB;">
+              <i class="fas fa-tint" style="color: #1E88E5; font-size: 40px;"></i>
+            </div>
+            <h4>Virechana</h4>
+            <p class="text-muted small">Controlled purgation therapy to cleanse Pitta dosha, addressing liver disorders and skin conditions.</p>
+          </div>
+        </div>
+        <div class="col-lg col-md-6">
+          <div class="panchakarma-card bg-orange-light">
+            <div class="icon" style="background-color: #FFECB3;">
+              <i class="fas fa-spa" style="color: #FB8C00; font-size: 40px;"></i>
+            </div>
+            <h4>Basti</h4>
+            <p class="text-muted small">Medicated enema therapy to balance Vata dosha, treating neurological and joint disorders.</p>
+          </div>
+        </div>
+        <div class="col-lg col-md-6">
+          <div class="panchakarma-card bg-purple-light">
+            <div class="icon" style="background-color: #E1BEE7;"><img src="https://img.icons8.com/fluency-systems-regular/48/8E24AA/head-profile.png" alt="Head Icon"/></div>
+            <h4>Nasya</h4>
+            <p class="text-muted small">Nasal administration of medicines to treat head and neck disorders, enhancing mental clarity.</p>
+          </div>
+        </div>
+        <div class="col-lg col-md-6">
+          <div class="panchakarma-card bg-red-light">
+            <div class="icon" style="background-color:#FFCDD2;"><img src="https://img.icons8.com/fluency-systems-regular/48/D32F2F/drop-of-blood.png" alt="Blood Drop Icon"/></div>
+            <h4>Raktamokshana</h4>
+            <p class="text-muted small">Bloodletting therapy to purify blood and treat skin diseases, hypertension, and inflammation.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-5">
+        <a href="{{ url_for('auth.register') }}" class="btn btn-success btn-lg">Start Your Healing Journey</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

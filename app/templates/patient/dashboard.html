@@ -1,0 +1,34 @@
+{% extends 'layouts/patient_base.html' %}
+
+{% block dashboard_content %}
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Welcome, {{ g.user.first_name }}!</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card shadow-sm mb-4">
+        <div class="card-header">
+          Your Next Appointment
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Shirodhara</h5>
+          <p class="card-text">with Dr. Demo Vaidya</p>
+          <p class="card-text"><strong>Tomorrow at 10:00 AM</strong></p>
+          <a href="#" class="btn btn-success">View Details</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm mb-4">
+        <div class="card-header">
+          Your Progress
+        </div>
+        <div class="card-body">
+           <p class="card-text">We'll add a progress chart here in a future step!</p>
+           <a href="#" class="btn btn-outline-success">View All Feedback</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
