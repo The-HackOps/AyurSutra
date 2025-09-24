@@ -20,6 +20,7 @@
         color: #212529;
         overflow-x: hidden;
       }
+      
       h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; font-weight: 700; color: #2E7D32; }
       .section-heading { text-align: center; margin-bottom: 4rem; }
       .section-heading h2 { font-size: 3rem; }
@@ -180,11 +181,61 @@
 .bubble:nth-child(1){width:20px;height:20px;left:10%;animation-duration:15s;} .bubble:nth-child(2){width:25px;height:25px;left:20%;animation-duration:12s;animation-delay:2s;} .bubble:nth-child(3){width:15px;height:15px;left:35%;animation-duration:20s;animation-delay:4s;} .bubble:nth-child(4){width:50px;height:50px;left:50%;animation-duration:18s;animation-delay:1s;} .bubble:nth-child(5){width:35px;height:35px;left:65%;animation-duration:14s;animation-delay:3s;} .bubble:nth-child(6){width:45px;height:45px;left:80%;animation-duration:16s;animation-delay:5s;} .bubble:nth-child(7){width:30px;height:30px;left:90%;animation-duration:19s;}
 @keyframes bubble-rise { 0% { transform: translateY(0); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-1080px); opacity: 0; } }
 
+/* --- LOADER AND LOGO ANIMATION --- */
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #F9F9F7; /* Matches your light background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.75s ease, visibility 0.75s ease;
+}
+.loader-wrapper img {
+    width: 150px; /* Initial large size */
+    height: auto;
+    transition: all 1s cubic-bezier(0.77, 0, 0.175, 1); /* Smooth animation */
+    /* These properties will be animated */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* This class is added by JavaScript when loading is done */
+.loader-wrapper.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+.loader-wrapper.hidden img {
+    /* Final position and size must match the navbar logo */
+    top: 18px;
+    left: 80px; /* Adjust based on container padding */
+    width: 65px; /* Matches navbar logo size */
+    transform: translate(0, 0);
+}
+
+/* Hide the real navbar logo initially, then fade it in */
+.navbar-brand {
+    opacity: 0;
+    transition: opacity 0.5s ease 0.5s; /* Fade in after a 0.5s delay */
+}
+body.loaded .navbar-brand {
+    opacity: 1;
+}
+
     </style>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="{% if request.endpoint == 'main.index' %}homepage-bg{% endif %}">
+    <div class="loader-wrapper">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AyurSutra Logo Loading">
+    </div>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top {% if request.endpoint == 'main.index' %}homepage-nav{% else %}bg-success{% endif %}">
             <div class="container d-flex justify-content-between align-items-center">
@@ -252,7 +303,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- !! ADD THIS NEW LOADER LOGIC !! ---
+        window.addEventListener('load', () => {
+            const loader = document.querySelector('.loader-wrapper');
+
+            // Add a small delay for a better visual effect
+            setTimeout(() => {
+                // Start the animation by adding the 'hidden' class
+                loader.classList.add('hidden');
+                // Add a class to the body to fade in the real logo
+                document.body.classList.add('loaded');
+            }, 500); // 500ms delay
+        });
             // Hamburger Menu Logic
             const burgerMenu = document.querySelector('.burger-menu-icon');
             const navList = document.querySelector('.nav-list');
