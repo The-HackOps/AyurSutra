@@ -2,31 +2,53 @@
 
 {% block title %}Login - AyurSutra{% endblock %}
 
-{% block content_contained %}
-<div class="row justify-content-center">
-  <div class="col-md-5">
-    <div class="card shadow-sm border-0">
-      <div class="card-body p-5">
-        <h2 class="card-title text-center mb-4 text-success">Welcome Back</h2>
-        <form method="POST">
-          <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" name="email" required>
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-          </div>
-          <div class="d-grid">
-            <button type="submit" class="btn btn-success btn-lg">Login</button>
-          </div>
-        </form>
-        <hr class="my-4">
-        <div class="text-center">
-          <a href="{{ url_for('auth.register') }}">Don't have an account? Register</a>
+{% block content_full_width %}
+<div class="form-container-centered">
+    <div class="register-card">
+        <h3 class="card-title text-center mb-2">Welcome Back!</h3>
+        <p class="text-muted text-center mb-4">Choose your login type to access your account</p>
+
+        <div class="role-toggle-group" id="roleToggle">
+            <button type="button" class="role-toggle-btn active" data-role="Patient">
+                <i class="fas fa-user"></i> Patient
+            </button>
+            <button type="button" class="role-toggle-btn" data-role="Doctor">
+                <i class="fas fa-stethoscope"></i> Doctor
+            </button>
         </div>
-      </div>
+
+        <form method="POST">
+            <div class="mb-3 text-start">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+            <div class="mb-4 text-start">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+            </div>
+            
+            <button type="submit" id="submitBtn" class="btn btn-success w-100 mb-3">Sign in as Patient</button>
+            
+            <p class="text-center mt-3 small text-muted">Don't have an account? <a href="{{ url_for('auth.register') }}">Register Now</a></p>
+        </form>
     </div>
-  </div>
 </div>
-{% endblock content_contained %}
+
+<script>
+    // This script updates the "Sign in as..." button text when you toggle
+    document.addEventListener('DOMContentLsoaded', function() {
+        const roleToggle = document.getElementById('roleToggle');
+        const roleButtons = roleToggle.querySelectorAll('.role-toggle-btn');
+        const submitBtn = document.getElementById('submitBtn');
+
+        roleButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                roleButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                const selectedRole = this.dataset.role;
+                submitBtn.textContent = `Sign in as ${selectedRole}`;
+            });
+        });
+    });
+</script>
+{% endblock %}

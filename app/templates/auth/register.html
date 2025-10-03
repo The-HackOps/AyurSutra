@@ -2,47 +2,91 @@
 
 {% block title %}Register - AyurSutra{% endblock %}
 
-{% block content_contained %}
-<div class="row justify-content-center">
-  <div class="col-md-6">
-    <div class="card shadow-sm border-0">
-      <div class="card-body p-5">
-        <h2 class="card-title text-center mb-4 text-success">Create Your Account</h2>
-        <form method="POST">
-          <div class="mb-3">
-            <label for="first_name" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="first_name" name="first_name" required>
-          </div>
-          <div class="mb-3">
-            <label for="last_name" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="last_name" name="last_name" required>
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" name="email" required>
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Register as:</label>
-            <select class="form-select" name="role" required>
-              <option value="" disabled selected>-- Select your role --</option>
-              <option value="patient">Patient</option>
-              <option value="practitioner">Practitioner</option>
-            </select>
-          </div>
-          <div class="d-grid">
-            <button type="submit" class="btn btn-success btn-lg">Register</button>
-          </div>
-        </form>
-        <hr class="my-4">
-        <div class="text-center">
-          <a href="{{ url_for('auth.login') }}">Already have an account? Login</a>
+{% block content_full_width %}
+<div class="form-container-centered">
+    <div class="register-card">
+        <h3 class="card-title text-center mb-2">Create Your Account</h3>
+        <p class="text-muted text-center mb-4">Choose your account type to get started.</p>
+
+        <div class="role-toggle-group" id="roleToggle">
+            <button type="button" class="role-toggle-btn active" data-role="patient">
+                <i class="fas fa-user"></i> Patient
+            </button>
+            <button type="button" class="role-toggle-btn" data-role="doctor">
+                <i class="fas fa-stethoscope"></i> Doctor
+            </button>
         </div>
-      </div>
+
+        <form method="POST" novalidate>
+            {{ form.hidden_tag() }}
+            
+            {{ form.role(class="d-none") }}
+
+            <div class="row">
+                <div class="col-md-6 mb-3 text-start">
+                    <label class="form-label">First Name</label>
+                    <input type="text" name="first_name" class="form-control" placeholder="Your first name" required>
+                </div>
+                <div class="col-md-6 mb-3 text-start">
+                    <label class="form-label">Last Name</label>
+                    <input type="text" name="last_name" class="form-control" placeholder="Your last name" required>
+                </div>
+            </div>
+
+            <div class="mb-3 text-start">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control", placeholder="Enter your email") }}
+                {% for error in form.email.errors %}
+                    <span class="text-danger small">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="mb-3 text-start">
+                {{ form.password.label(class="form-label") }}
+                {{ form.password(class="form-control", placeholder="Create a password") }}
+                 {% for error in form.password.errors %}
+                    <span class="text-danger small">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="mb-4 text-start">
+                {{ form.confirm_password.label(class="form-label") }}
+                {{ form.confirm_password(class="form-control", placeholder="Confirm your password") }}
+                 {% for error in form.confirm_password.errors %}
+                    <span class="text-danger small">{{ error }}</span>
+                {% endfor %}
+            </div>
+            
+            <button type="submit" id="submitBtn" class="btn btn-success w-100 mb-2">Create Patient Account</button>
+            
+            <p class="text-center mt-3 small text-muted">Already have an account? <a href="{{ url_for('auth.login') }}">Sign In</a></p>
+        </form>
     </div>
-  </div>
 </div>
-{% endblock content_contained %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const roleToggle = document.getElementById('roleToggle');
+        const roleButtons = roleToggle.querySelectorAll('.role-toggle-btn');
+        const roleInputField = document.querySelector('input[name="role"]');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Function to update UI based on role
+        const updateRole = (role) => {
+            roleInputField.value = role;
+            const roleCapitalized = role.charAt(0).toUpperCase() + role.slice(1);
+            submitBtn.textContent = `Create ${roleCapitalized} Account`;
+        };
+
+        // Set initial state
+        updateRole('patient');
+
+        roleButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                roleButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                const selectedRole = this.dataset.role;
+                updateRole(selectedRole);
+            });
+        });
+    });
+</script>
+{% endblock %}

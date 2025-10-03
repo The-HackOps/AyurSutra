@@ -15,11 +15,14 @@
       /* --- GLOBAL STYLES --- */
       html { scroll-behavior: smooth; }
       body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #F9F9F7; /* Default fallback */
-        color: #212529;
-        overflow-x: hidden;
-      }
+  font-family: 'Poppins', sans-serif;
+  background-color: #F9F9F7;
+  color: #212529;
+  overflow-x: hidden;
+  display: flex; /* <-- Add this */
+  flex-direction: column; /* <-- Add this */
+  min-height: 100vh; /* <-- Add this */
+}
       
       h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; font-weight: 700; color: #2E7D32; }
       .section-heading { text-align: center; margin-bottom: 4rem; }
@@ -154,13 +157,13 @@
       }
 
       /* --- FOOTER --- */
-      .footer { background-color: transparent; color: #6c757d; padding: 2.5rem 1rem; text-align: center; }
-      .footer-nav-link {
-        color: #6c757d; text-decoration: none; margin: 0 1rem; font-weight: 600;
-        text-transform: uppercase; font-size: 0.9rem;
-        transition: color 0.3s, font-weight 0.3s, transform 0.3s;
-        display: inline-block; /* Required for transform on hover */
-      }
+      .footer {
+  background-color: transparent;
+  color: #6c757d;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  margin-top: 1rem; /* <-- Reduced whitespace */
+}
       .footer-nav-link:hover { color: #2E7D32; font-weight: 700; transform: scale(1.05); }
       .footer-coded-by { font-size: 1rem; margin-top: 1rem; }
 
@@ -227,8 +230,284 @@
 body.loaded .navbar-brand {
     opacity: 1;
 }
+/* --- REGISTER PAGE SPECIFIC STYLES --- */
+.register-page-body {
+    /* This background will match the homepage's animated particle background */
+    background-color: #f0efe9; /* A light, consistent background */
+}
 
+.form-container-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px); /* Adjust for fixed header/footer if needed */
+    padding: 2rem 0;
+}
+
+.register-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 650px; /* Slightly wider for better toggle display */
+    text-align: center;
+}
+
+.role-toggle-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.role-toggle-btn {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    background-color: transparent;
+    color: #6c757d;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.role-toggle-btn i {
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+.role-toggle-btn.active {
+    background-color: #2E7D32; /* Green for active */
+    color: white;
+    box-shadow: 0 3px 10px rgba(46, 125, 50, 0.3);
+}
+
+.role-toggle-btn:not(.active):hover {
+    background-color: #e0e0e0;
+    color: #333;
+}
+/* --- DASHBOARD-SPECIFIC NAVBAR STYLES --- */
+.navbar-brand-dashboard {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between logo and text */
+}
+.navbar-brand-dashboard span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.logout-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 8px 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+.logout-btn i {
+  margin-right: 8px;
+}
+.logout-btn:hover {
+  background-color: #fff;
+  color: var(--ayur-green);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+/* --- UNIFIED DASHBOARD HEADER STYLES --- */
+.dashboard-body {
+    background: linear-gradient(-45deg, #e8f5e9, #fdfbf4, #e3f2fd, #f3e5f5);
+    background-size: 400% 400%;
+    animation: gradient 20s ease infinite;
+}
+
+/* The new unified header */
+.unified-header {
+    padding: 0.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1030; /* High z-index to stay on top */
+
+    /* Frosted Glass Effect */
+    background-color: rgba(255, 255, 255, 0.7);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.unified-header .navbar-brand-dashboard span {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+.unified-header .logout-btn {
+    background-color: rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.1);
+    color: #333;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+.unified-header .logout-btn:hover {
+    background-color: #FFEBEE; /* Light red background */
+    border-color: #D32F2F;    /* Stronger red border */
+    color: #D32F2F;           /* Stronger red text */
+}
+
+/* Centered Navigation Links */
+.header-nav-links {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+.header-nav-links .nav-link {
+    color: #555;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    border-radius: 20px;
+    transition: color 0.3s, transform 0.3s;
+    display: inline-block;
+    text-decoration: none;
+}
+.header-nav-links .nav-link:hover {
+    color: var(--ayur-green);
+    transform: scale(1.05);
+}
+.header-nav-links .nav-link.active {
+    color: var(--ayur-green);
+    font-weight: 700;
+}
+
+/* Main Content Area */
+.dashboard-main-content {
+    padding: 2rem;
+    width: 100%;
+    max-width: 1600px;
+    margin: 1rem auto;
+    position: relative;
+}
+
+/* Footer on Dashboard */
+.footer.dashboard-footer {
+    margin-top: 2rem;
+    padding: 1.5rem 1rem;
+    background-color: transparent;
+}
+/* --- FOOTER --- */
+.footer {
+    background-color: #f8f9fa; /* A light, clean background */
+    padding: 4rem 0;
+    border-top: 1px solid #e0e0e0;
+}
+.footer-section h5 {
+    font-family: 'Playfair Display', serif;
+    color: var(--ayur-green);
+    margin-bottom: 1.5rem;
+}
+.footer-section p, .footer-section a {
+    color: #555;
+    text-decoration: none;
+    line-height: 1.8;
+}
+.footer-section a:hover {
+    color: var(--ayur-green);
+    text-decoration: underline;
+}
+.footer-bottom {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+    color: #777;
+}
+/* --- HAMBURGER MENU --- */
+.burger-menu-icon { cursor: pointer; border: none; background: none; padding: 0; z-index: 1001; }
+.burger-menu-icon .line { width: 28px; height: 3px; background-color: #2bda08; margin: 5px 0; transition: all 0.4s ease; border-radius: 2px; }
+.homepage-nav .burger-menu-icon .line { background-color: #2E7D32; }
+.burger-menu-icon.toggle .line1 { transform: rotate(-45deg) translate(-6px, 6px); }
+.burger-menu-icon.toggle .line2 { opacity: 0; }
+.burger-menu-icon.toggle .line3 { transform: rotate(45deg) translate(-6px, -6px); }
+
+.nav-list { position: fixed; top: 0; right: -100%; width: 320px; height: 100vh; background-color: #1a1a1a; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; transition: right 0.6s cubic-bezier(0.77, 0, 0.175, 1); }
+.nav-list.active { right: 0; }
+.nav-list .nav-item { margin: 1rem 0; list-style: none; }
+.nav-list .nav-link { font-size: 1.2rem; text-transform: uppercase; color: #cecece; letter-spacing: 1.5px; }
+/* --- DASHBOARD STYLES --- */
+.dashboard-body {
+    background-color: #f0f2f5;
+}
+.sub-header-nav {
+    padding: 0.75rem 0;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-top: 65px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.sub-header-nav .nav {
+    justify-content: center;
+}
+.sub-header-nav .nav-link {
+    color: #555;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+.sub-header-nav .nav-link.active,
+.sub-header-nav .nav-link:hover {
+    color: var(--ayur-green);
+    font-weight: 700;
+}
+.dashboard-main-content {
+    padding: 2rem;
+    width: 100%;
+    max-width: 1600px;
+    margin: 1rem auto;
+}
+/* --- NEW SITE FOOTER --- */
+.site-footer {
+    background-color: transparent; /* Merges with page background */
+    color: #6c757d;
+    padding: 2.5rem 1rem;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    border-top: 1px solid #e0e0e0; /* A subtle separator line */
+}
+/* This is the previous design for homepage footer links */
+.footer-nav-link {
+    color: #6c757d;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: color 0.3s, transform 0.3s;
+    display: inline-block;
+}
+.footer-nav-link:hover {
+    color: var(--ayur-green);
+    transform: scale(1.05); /* The hover animation */
+}
     </style>
+
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -237,68 +516,80 @@ body.loaded .navbar-brand {
         <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AyurSutra Logo Loading">
     </div>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top {% if request.endpoint == 'main.index' %}homepage-nav{% else %}bg-success{% endif %}">
-            <div class="container d-flex justify-content-between align-items-center">
-                <a class="navbar-brand" href="{% if g.user %}{{ url_for('main.dashboard') }}{% else %}{{ url_for('main.index') }}{% endif %}">
-                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AyurSutra Logo" class="navbar-brand-img">
-                </a>
-                <div class="d-flex align-items-center">
-                    <button class="burger-menu-icon" aria-label="Toggle navigation">
+    <nav class="navbar shadow-sm fixed-top navbar-blurry">
+        <div class="container-fluid px-4">
+            {% if g.user %}
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <a class="navbar-brand navbar-brand-dashboard d-flex align-items-center" href="{{ url_for('main.dashboard') }}">
+                        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AyurSutra Logo" style="height: 50px;">
+                        <span class="ms-2">AyurSutra</span>
+                    </a>
+                    <a href="{{ url_for('auth.logout') }}" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            {% else %}
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <a class="navbar-brand" href="{{ url_for('main.index') }}">
+                        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AyurSutra Logo" style="height: 65px;">
+                    </a>
+                    <div class="burger-menu-icon">
                         <div class="line line1"></div>
                         <div class="line line2"></div>
                         <div class="line line3"></div>
-                    </button>
+                    </div>
                 </div>
-            </div>
-        </nav>
-
-        <ul class="nav-list">
-    <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('main.index') }}#">
-            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Home" class="hamburger-logo">
-        </a>
-    </li>
-    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#therapies">Panchakarma</a></li>
-    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#more-therapies">More Therapies</a></li>
-    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#philosophy">Our Philosophy</a></li>
-    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#how-it-works">How It Works</a></li>
-    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#contact">Contact</a></li>
-    <li class="nav-item" style="margin-top: 2rem;">
-        {% if g.user %}
-        <div class="cta"><a href="{{ url_for('auth.logout') }}" class="btn nav-link">Logout</a></div>
-        {% else %}
-        <div class="cta"><a href="{{ url_for('auth.register') }}" class="btn nav-link">Login / Sign Up</a></div>
-        {% endif %}
-    </li>
-</ul>
-    </header>
+            {% endif %}
+        </div>
+    </nav>
+    {% if not g.user %}
+    <ul class="nav-list">
+       <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="Home" class="hamburger-logo"></a></li>
+       <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#therapies">Therapies</a></li>
+       <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#more-therapies">More Therapies</a></li>
+       <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#how-it-works">How It Works</a></li>
+       <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#philosophy">Our Philosophy</a></li>
+       <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#contact">Contact</a></li>
+       <li class="nav-item" style="margin-top: 2rem;"><div class="cta"><a href="{{ url_for('auth.register') }}" class="btn nav-link">Login / Sign Up</a></div></li>
+    </ul>
+    {% endif %}
+</header>
 
     <main>
-        {% block content_full_width %}{% endblock %}
-        <div class="container" style="padding-top: 70px;">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}{% for category, message in messages %}
-                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">{{ message }}<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
-                {% endfor %}{% endif %}
-            {% endwith %}
-            {% block content_contained %}{% endblock %}
-        </div>
-    </main>
+    {% block content_full_width %}{% endblock %}
 
-    <footer class="footer">
-        <div class="footer-nav">
-    <a href="{{ url_for('main.index') }}#" class="footer-nav-link">Home</a>
-    <a href="{{ url_for('main.index') }}#therapies" class="footer-nav-link">Panchakarma</a>
-    <a href="{{ url_for('main.index') }}#more-therapies" class="footer-nav-link">More Therapies</a>
-    <a href="{{ url_for('main.index') }}#philosophy" class="footer-nav-link">Philosophy</a>
-    <a href="{{ url_for('main.index') }}#how-it-works" class="footer-nav-link">How It Works</a>
-    <a href="{{ url_for('main.index') }}#contact" class="footer-nav-link">Contact</a>
-</div>
-            <div class="footer-coded-by">
-                <p><i class="fas fa-code"></i> with <i class="fas fa-heart" style="color: #0add1b;"></i> by HackOps &copy; 2025</p>
-            </div>
+    <div class="container" style="padding-top: 70px;">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content_contained %}{% endblock %}
+    </div>
+</main>
+
+    <footer class="site-footer">
+    <div class="container">
+        {% if request.endpoint == 'main.index' %}
+        <div class="footer-nav mb-2">
+            <a href="{{ url_for('main.index') }}#" class="footer-nav-link">Home</a>
+            <a href="{{ url_for('main.index') }}#therapies" class="footer-nav-link">Therapies</a>
+            <a href="{{ url_for('main.index') }}#how-it-works" class="footer-nav-link">How It Works</a>
+            <a href="{{ url_for('main.index') }}#philosophy" class="footer-nav-link">Philosophy</a>
+            <a href="{{ url_for('main.index') }}#contact" class="footer-nav-link">Contact</a>
         </div>
-    </footer>
+        {% endif %}
+        <div class="footer-coded-by">
+            <p class="mb-0">Made by Team HackOps</p>
+        </div>
+    </div>
+</footer>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
