@@ -77,16 +77,6 @@ This repository contains a prototype built for speed and reliability at demo tim
 
 ---
 
-## Screenshots
-
-> Replace the placeholders with real screenshots before publishing the repo.
-
-* `docs/screenshots/landing-page.png` — Landing page
-* `docs/screenshots/patient-dashboard.png` — Patient dashboard
-* `docs/screenshots/doctor-dashboard.png` — Practitioner dashboard
-
----
-
 ## Installation & Setup
 
 > These instructions are for local development/testing only (prototype). The project uses mocked data to ensure stable demos without database dependencies.
@@ -164,17 +154,6 @@ AyurSutra/
 └── run.py                # Local development entry point
 ```
 
----
-
-## Deployment (Vercel)
-
-This prototype is designed for a serverless entrypoint (see the `api/` folder). To deploy on Vercel:
-
-1. Create a Vercel project and connect the GitHub repository.
-2. Ensure `vercel.json` points the correct serverless entry (the `api/` folder).
-3. Set environment variables (if you migrate from mocked data to a DB in the future).
-4. Deploy via Vercel dashboard or `vercel` CLI.
-
 *Note:* The current prototype uses mocked data for reliable demos. If you want DB-backed deployments, add a secure database (Postgres / MySQL) and update the configuration and `auth.py` accordingly.
 
 ---
@@ -186,19 +165,6 @@ This prototype is designed for a serverless entrypoint (see the `api/` folder). 
 * **Telemedicine:** Integrated video consultation feature for remote follow-ups and consultations.
 * **Persistent DB:** Migrate from mocked data to a secure, audited database with role-based data encryption and backups.
 * **Audit & Compliance:** Add logging, audit trails and role-based data access for practical clinic use.
-
----
-
-## Contributing
-
-Contributions are welcome. Please follow these steps:
-
-1. Fork the repository.
-2. Create a feature branch: `git checkout -b feature/my-feature`
-3. Commit your changes and push: `git push origin feature/my-feature`
-4. Open a Pull Request describing your changes.
-
-If you plan to add production features (database, auth, payments), open an issue first to discuss the approach and security considerations.
 
 ---
 
