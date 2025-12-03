@@ -14,17 +14,13 @@
 * [Overview](#overview)
 * [Key Features](#key-features)
 * [Tech Stack](#tech-stack)
-* [Screenshots](#screenshots)
 * [Installation & Setup](#installation--setup)
-
   * [Prerequisites](#prerequisites)
   * [Local setup](#local-setup)
 * [Usage](#usage)
 * [Login Credentials (Prototype)](#login-credentials-prototype)
 * [Project Structure](#project-structure)
-* [Deployment (Vercel)](#deployment-vercel)
 * [Future Scope](#future-scope)
-* [Contributing](#contributing)
 * [License](#license)
 * [Team](#team)
 
