@@ -2,8 +2,6 @@
 
 **The Smart Management Platform for Panchakarma Wellness**
 
-**Team HackOps | Smart India Hackathon (SIH) 2025**
-
 ---
 
 > A lightweight SaaS-style web application prototype to digitize and streamline Panchakarma therapy management for Ayurvedic centres. AyurSutra bridges traditional Ayurvedic practice and modern clinic management with role-based access, session tracking, visual analytics and digital patient records.
@@ -177,7 +175,7 @@ This project is released under the **MIT License**. See `LICENSE` for details.
 * Full Stack — Dev
 * Presenter, QA & Testing — Taniya
 
-Made with ❤️ by Team HackOps for SIH 2025
+**Made with ❤️ by Team HackOps for SIH 2025**
 
 ---
 
