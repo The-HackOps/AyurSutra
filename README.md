@@ -1,4 +1,4 @@
-# 🌿 AyurSutra
+#  AyurSutra
 
 **The Smart Management Platform for Panchakarma Wellness**
 
