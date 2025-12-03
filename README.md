@@ -26,7 +26,7 @@
 
 ## Demo
 
-**Live demo:** *https://ayursutra-hackops.vercel.app/*
+**Live demo:** *[AyurSutra](https://ayursutra-hackops.vercel.app/)*
 
 ---
 
