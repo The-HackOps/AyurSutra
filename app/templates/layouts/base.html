@@ -113,6 +113,44 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.07);
 }
 
+/* --- LIQUID GLASS HEADER STYLE --- */
+.liquid-glass-nav {
+    /* Translucent white background */
+    background-color: rgba(255, 255, 255, 0.72) !important; 
+    
+    /* The Apple Blur Magic */
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    
+    /* Subtle border and shadow for depth */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    
+    /* Ensure it stays on top */
+    z-index: 1030;
+    transition: all 0.3s ease;
+}
+
+/* Reset main padding so the hero section starts at the very top */
+main {
+    padding-top: 0 !important;
+}
+
+/* Ensure the Hero Section fills the screen and centers content */
+#section1 {
+    min-height: 100vh;     /* Full viewport height */
+    display: flex;         /* Use Flexbox */
+    align-items: center;   /* Vertically center */
+    justify-content: center; /* Horizontally center */
+    padding-top: 0;        /* Ensure no extra padding inside pushes it down */
+    margin-top: 0;
+}
+
+/* Ensure anchor links (like #how-it-works) don't land behind the header */
+section {
+    scroll-margin-top: 100px;
+}
+
 /* !! ADD THIS NEW BLOCK BELOW !! */
 .panchakarma-card {
     min-width: 200px;  /* Sets a minimum width */
@@ -506,6 +544,20 @@ body.loaded .navbar-brand {
     color: var(--ayur-green);
     transform: scale(1.05); /* The hover animation */
 }
+
+/* Style for the Github Link in Footer */
+.github-link {
+    color: inherit;       /* Inherits the grey color from the parent <p> */
+    text-decoration: none; /* Removes the default underline */
+    font-weight: 600;      /* Makes it slightly bold */
+    transition: color 0.3s ease;
+}
+
+.github-link:hover {
+    color: #2E7D32;        /* Changes to AyurSutra Green on hover */
+    text-decoration: underline; /* Adds underline on hover for clarity */
+}
+
     </style>
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -516,7 +568,7 @@ body.loaded .navbar-brand {
         <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AyurSutra Logo Loading">
     </div>
     <header>
-    <nav class="navbar shadow-sm fixed-top navbar-blurry">
+    <nav class="navbar fixed-top liquid-glass-nav">
         <div class="container-fluid px-4">
             {% if g.user %}
                 <div class="d-flex justify-content-between align-items-center w-100">
@@ -586,7 +638,9 @@ body.loaded .navbar-brand {
         </div>
         {% endif %}
         <div class="footer-coded-by">
-            <p class="mb-0">Made by Team HackOps</p>
+            <p class="mb-0">
+                Made by <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="github-link">Team HackOps</a>
+            </p>
         </div>
     </div>
 </footer>
