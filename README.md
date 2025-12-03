@@ -213,7 +213,7 @@ This project is released under the **MIT License**. See `LICENSE` for details.
 * Backend / Database — Anurag, Dev, Uday 
 * UI/UX Designer — Krishna, Nishant, Taniya
 * Full Stack — Dev
-* QA & Testing — Taniya
+* Presenter, QA & Testing — Taniya
 
 Made with ❤️ by Team HackOps for SIH 2025
 
