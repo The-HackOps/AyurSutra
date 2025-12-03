@@ -100,7 +100,7 @@ This repository contains a prototype built for speed and reliability at demo tim
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR-USERNAME/AyurSutra.git
+git clone https://github.com/The-HackOps/AyurSutra.git
 cd AyurSutra
 
 # 2. Create a virtual environment
