@@ -1,50 +1,55 @@
-# /ayursutra/app/auth.py
-
 from flask import (
     Blueprint, render_template, request, redirect, url_for, flash, session, g
 )
-from werkzeug.security import check_password_hash, generate_password_hash
-import pymysql
-
-# Import our updated RegistrationForm
 from .forms import RegistrationForm
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
+# --- MOCK DATA FOR PROTOTYPE ---
+# This dictionary simulates your database. 
+# It contains one Patient and one Doctor.
+MOCK_USERS = {
+    1: {
+        'id': 1, 
+        'email': 'patient@ayursutra.com', 
+        'password': '123', 
+        'first_name': 'John', 
+        'last_name': 'Doe', 
+        'role': 'patient'
+    },
+    2: {
+        'id': 2, 
+        'email': 'doctor@ayursutra.com', 
+        'password': '123', 
+        'first_name': 'Ayur', 
+        'last_name': 'Sutra', 
+        'role': 'doctor'
+    }
+}
+
+# --- IMPORTANT: LOADS USER INTO NAVBAR ---
+# This runs before every request to check if a user is logged in.
+# It replaces the database lookup for g.user
+@auth_bp.before_app_request
+def load_logged_in_user():
+    user_id = session.get('user_id')
+
+    if user_id is None:
+        g.user = None
+    else:
+        # Simulate fetching user from DB
+        g.user = MOCK_USERS.get(user_id)
 
 @auth_bp.route('/register', methods=('GET', 'POST'))
 def register():
     form = RegistrationForm()
 
     if form.validate_on_submit():
-        db = g.db_cursor
+        # --- BYPASS DB INSERT ---
+        # In a real app, we would insert into MySQL here.
+        # For prototype, we just pretend it worked.
         
-        # Check if user already exists
-        db.execute("SELECT id FROM Users WHERE email = %s", (form.email.data,))
-        if db.fetchone() is not None:
-            flash(f"User {form.email.data} is already registered.", 'warning')
-            return redirect(url_for('auth.login'))
-
-        # Insert the new user into the Users table using data from the form
-        if form.password.data is None:
-            flash("Password is required.", "danger")
-            return render_template('auth/register.html', form=form)
-        db.execute(
-            "INSERT INTO Users (email, password_hash, first_name, last_name, role) VALUES (%s, %s, %s, %s, %s)",
-            (form.email.data, generate_password_hash(form.password.data), form.first_name.data, form.last_name.data, form.role.data)
-        )
-        new_user_id = db.lastrowid
-        
-        # Insert into the correct role-specific table
-        role = form.role.data
-        if role == 'patient':
-            db.execute("INSERT INTO Patients (user_id) VALUES (%s)", (new_user_id,))
-        elif role == 'practitioner' or role == 'doctor': # Accept both terms
-            db.execute("INSERT INTO Practitioners (user_id) VALUES (%s)", (new_user_id,))
-        
-        g.db_conn.commit()
-        
-        flash('Registration successful! Please log in.', 'success')
+        flash('Registration successful! (Prototype Mode: Please log in with patient@ayursutra.com)', 'success')
         return redirect(url_for('auth.login'))
     
     return render_template('auth/register.html', form=form)
@@ -52,26 +57,31 @@ def register():
 
 @auth_bp.route('/login', methods=('GET', 'POST'))
 def login():
-    # No changes needed here, but keeping it consistent
     if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        db = g.db_cursor
+        email = request.form.get('email')
+        password = request.form.get('password')
         error = None
         
-        db.execute("SELECT * FROM Users WHERE email = %s", (email,))
-        user = db.fetchone()
+        user = None
 
+        # --- BYPASS DB SELECT ---
+        # Check against our hardcoded Mock Users
+        if email == 'patient@ayursutra.com' and password == '123':
+            user = MOCK_USERS[1]
+        elif email == 'doctor@ayursutra.com' and password == '123':
+            user = MOCK_USERS[2]
+        
         if user is None:
-            error = 'Incorrect email.'
-        elif not check_password_hash(user['password_hash'], password):
-            error = 'Incorrect password.'
-
+            error = 'Invalid credentials. Try patient@ayursutra.com (Password: 123)'
+        
         if error is None:
+            # Login successful
             session.clear()
             session['user_id'] = user['id']
             session['role'] = user['role']
             session['first_name'] = user['first_name']
+            
+            flash(f"Welcome back, {user['first_name']}!", 'success')
             return redirect(url_for('main.dashboard'))
 
         flash(error, 'danger')
