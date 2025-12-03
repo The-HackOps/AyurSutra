@@ -170,10 +170,10 @@ This project is released under the **MIT License**. See `LICENSE` for details.
 
 ## Team HackOps
 
-* Backend / Database — Anurag, Dev, Uday 
-* UI/UX Designer — Krishna, Nishant, Taniya
-* Full Stack — Dev
-* Presenter, QA & Testing — Taniya
+* Backend / Database — [Anurag](https://github.com/anuragkumar88), [Dev Kumar](https://github.com/DevKumar005), [Uday](https://github.com/singhuday1)
+* UI/UX Designer — [Krishna](https://github.com/krishnajais001), [Nishant](https://github.com/maninishant), [Taniya](https://github.com/Taniyarawat)
+* Full Stack — [Dev Kumar](https://github.com/DevKumar005)
+* Presenter, QA & Testing — [Taniya](https://github.com/Taniyarawat)
 
 **Made with ❤️ by Team HackOps for SIH 2025**
 
@@ -181,4 +181,4 @@ This project is released under the **MIT License**. See `LICENSE` for details.
 
 ## Contact
 
-For questions about the project or to request assets (screenshots, demo credentials, presentation slides), contact the team lead or open an issue in this repository.
+For questions about the project or to request contributions, contact the team lead or open an issue in this repository.
