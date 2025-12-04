@@ -4,7 +4,7 @@
 
 ---
 
-> A lightweight SaaS-style web application prototype to digitize and streamline Panchakarma therapy management for Ayurvedic centres. AyurSutra bridges traditional Ayurvedic practice and modern clinic management with role-based access, session tracking, visual analytics and digital patient records.
+A lightweight SaaS-style web application prototype to digitize and streamline Panchakarma therapy management for Ayurvedic centres. AyurSutra bridges traditional Ayurvedic practice and modern clinic management with role-based access, session tracking, visual analytics and digital patient records.
 
 ## Table of contents
 
@@ -73,7 +73,7 @@ This repository contains a prototype built for speed and reliability at demo tim
 
 ## Installation & Setup
 
-> These instructions are for local development/testing only (prototype). The project uses mocked data to ensure stable demos without database dependencies.
+These instructions are for local development/testing only (prototype). The project uses mocked data to ensure stable demos without database dependencies.
 
 ### Prerequisites
 
@@ -116,7 +116,7 @@ After launching, open your browser to `http://127.0.0.1:5001` (default for this 
 
 ## Login Credentials (Prototype)
 
-> For the SIH 2025 demo the app ships with mocked users so deployments remain stable without a SQL backend.
+For the SIH 2025 demo the app ships with mocked users so deployments remain stable without a SQL backend.
 
 * **Patient**
 
