@@ -16,12 +16,11 @@ def index():
     return render_template('index.html')
 
 @main_bp.route('/dashboard')
-@login_required  # <-- This still works!
+@login_required
 def dashboard():
-    # This is the main redirector
-    if session['role'] == 'patient':
+    if session.get('role') == 'patient':
         return render_template('patient/dashboard.html')
-    elif session['role'] == 'practitioner':
+    elif session.get('role') == 'practitioner':
         return render_template('practitioner/dashboard.html')
     
-    return "Error: Unknown role."
+    return "Error: Unknown role. Please log in again."
