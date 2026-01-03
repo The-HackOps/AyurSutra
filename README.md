@@ -32,9 +32,11 @@ A lightweight SaaS-style web application prototype to digitize and streamline Pa
 
 ## Overview
 
-Many Ayurvedic centres still operate with manual, paper-based Panchakarma workflows. AyurSutra is a prototype web app that automates the therapy lifecycle with: role-based authentication for doctors and patients, session tracking, digital patient records, booking & appointment flows and visual analytics to help practitioners optimise care delivery.
+Many Ayurvedic centres still operate with manual, paper-based Panchakarma workflows. AyurSutra is a high-fidelity prototype web app designed for the SIH 2025 demo. It automates the therapy lifecycle with role-based authentication, simulated booking flows, and interactive wellness analytics.
 
 This repository contains a prototype built for speed and reliability at demo time using mocked data (no production DB included in this prototype).
+
+Note: This repository is optimized for Vercel Serverless deployments. It uses a Mock Data Engine to ensure 100% stability during live demos without the overhead of a production database.
 
 ---
 
@@ -109,8 +111,9 @@ After launching, open your browser to `http://127.0.0.1:5001` (default for this 
 
 ## Usage
 
-* Use the role-based demo credentials (below) to log in as a Patient or Doctor.
-* Explore the dashboards, create or view mocked therapy sessions, and check visual analytics.
+* Switch Roles: Use the toggle buttons on the Sign-In page to switch between Patient and Doctor interfaces.
+* Book & Approve: Book a therapy as a Patient and see it appear for approval in the Doctor's Manage Schedule tab.
+* Analyze: Check the "Patient Feedback" and "Progress" tabs to see visual health trends.
 
 ---
 
