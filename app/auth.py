@@ -21,7 +21,7 @@ MOCK_USERS = {
         'password': '123', 
         'first_name': 'Ayur', 
         'last_name': 'Sutra', 
-        'role': 'doctor'
+        'role': 'practitioner' # Changed from 'doctor' to 'practitioner' to match main.py
     }
 }
 
