@@ -1,12 +1,12 @@
 {% extends 'layouts/base.html' %}
 
-{% block content_full_width %}
-<header class="unified-header">
+{% block header %}
+<nav class="navbar fixed-top liquid-glass-nav">
   <div class="container-fluid px-4">
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-center w-100">
       <a class="navbar-brand navbar-brand-dashboard d-flex align-items-center" href="{{ url_for('main.dashboard') }}">
           <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AyurSutra Logo" style="height: 50px;">
-          <span class="ms-2">AyurSutra</span>
+          <span class="ms-2" style="color: #2E7D32;">AyurSutra</span>
       </a>
 
       <div class="header-nav-links">
@@ -14,7 +14,6 @@
         <a class="nav-link {% if request.endpoint == 'patient.schedule' %}active{% endif %}" href="{{ url_for('patient.schedule') }}"><i class="fas fa-calendar-alt me-1"></i> My Schedule</a>
         <a class="nav-link {% if request.endpoint == 'patient.progress' %}active{% endif %}" href="{{ url_for('patient.progress') }}"><i class="fas fa-chart-line me-1"></i> My Feedback</a>
         <a class="nav-link {% if request.endpoint == 'patient.book' %}active{% endif %}" href="{{ url_for('patient.book') }}"><i class="fas fa-leaf me-1"></i> Book Therapy</a>
-        <a class="nav-link" href="#"><i class="fas fa-user me-1"></i> {{ g.user.first_name }}</a>
       </div>
 
       <a href="{{ url_for('auth.logout') }}" class="logout-btn">
@@ -22,9 +21,11 @@
       </a>
     </div>
   </div>
-</header>
+</nav>
+{% endblock %}
 
-<div class="dashboard-main-content">
+{% block content_full_width %}
+<div class="dashboard-main-content" style="margin-top: 100px;">
     {% block dashboard_content %}{% endblock %}
 </div>
 {% endblock %}
