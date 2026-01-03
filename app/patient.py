@@ -57,3 +57,30 @@ def progress_data():
         'labels': ['2025-09-01', '2025-09-10', '2025-09-20'],
         'data': [4, 5, 8] # Recovery scores
     })
+@patient_bp.route('/feedback/<int:appointment_id>', methods=('GET', 'POST'))
+@login_required
+def feedback(appointment_id):
+    """Handles the feedback submission for a specific appointment using mock data."""
+    
+    # 1. Find the specific appointment from our Mock list to show details on the page
+    # This replaces the DB query: SELECT name, start_time FROM Appointments...
+    appointment = next((a for a in MOCK_APPOINTMENTS if a['id'] == appointment_id), None)
+
+    if not appointment:
+        flash('Appointment not found.', 'danger')
+        return redirect(url_for('patient.schedule'))
+
+    if request.method == 'POST':
+        # 2. In a real app, we'd save these to the DB. 
+        # For the prototype, we just capture them and simulate success.
+        rating = request.form.get('rating')
+        improvements = request.form.get('improvements')
+        symptoms = request.form.get('symptoms')
+        
+        # Log to terminal for debugging if needed
+        print(f"Feedback Received: Appt {appointment_id}, Rating {rating}")
+        
+        flash('Thank you for your feedback! Your practitioner has been notified.', 'success')
+        return redirect(url_for('patient.schedule'))
+
+    return render_template('patient/feedback.html', appointment=appointment, appointment_id=appointment_id)
