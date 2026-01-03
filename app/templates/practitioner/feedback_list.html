@@ -1,0 +1,27 @@
+{% extends 'layouts/practitioner_base.html' %}
+
+{% block dashboard_content %}
+<div class="pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Patient Feedback & Wellness Reports</h1>
+</div>
+
+<div class="row">
+    {% for fb in feedbacks %}
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm border-start border-success border-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">{{ fb.patient_name }}</h5>
+                    <span class="text-warning">
+                        {% for i in range(fb.rating) %}★{% endfor %}
+                    </span>
+                </div>
+                <h6 class="card-subtitle mb-2 text-muted">{{ fb.therapy }}</h6>
+                <p class="card-text"><strong>Improvements:</strong> {{ fb.improvements }}</p>
+                <p class="card-text text-danger small"><strong>Symptoms:</strong> {{ fb.symptoms }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
