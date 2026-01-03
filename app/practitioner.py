@@ -14,6 +14,15 @@ MOCK_PATIENT_LIST = [
         'therapy_name': 'Abhyanga',
         'patient_first_name': 'John',
         'patient_last_name': 'Doe'
+    },
+    {
+        'id': 102,
+        'patient_id': 2,
+        'start_time': datetime(2025, 10, 21, 09, 00),
+        'status': 'confirmed',
+        'therapy_name': 'Shirodhara',
+        'patient_first_name': 'Jane',
+        'patient_last_name': 'Smith'
     }
 ]
 
@@ -31,5 +40,16 @@ def approve(appointment_id):
 @practitioner_bp.route('/patient/<int:patient_id>/progress')
 @practitioner_required
 def patient_progress(patient_id):
+    # In a real app, find patient by ID. For prototype, we use a generic mock.
     patient = {'first_name': 'John', 'last_name': 'Doe'}
     return render_template('practitioner/progress.html', patient=patient, patient_id=patient_id)
+
+# --- NEW: ROUTE FOR CHART DATA ---
+@practitioner_bp.route('/api/patient/<int:patient_id>/progress_data')
+@practitioner_required
+def patient_progress_data(patient_id):
+    """Returns mock feedback data for the Chart.js line graph."""
+    return jsonify({
+        'labels': ['Day 1', 'Day 3', 'Day 5', 'Day 7'],
+        'data': [2, 3, 4, 5]  # Mock recovery ratings
+    })
