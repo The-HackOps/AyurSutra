@@ -1,28 +1,28 @@
 {% extends 'layouts/practitioner_base.html' %}
 
 {% block dashboard_content %}
-    <div class="row">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Doctor Dashboard</h1>
+  </div>
+
+  <div class="row">
     <div class="col-md-8">
       <div class="card shadow-sm mb-4">
-        <div class="card-header">
-          Today's Appointments
-        </div>
+        <div class="card-header">Today's Overview</div>
         <div class="card-body">
-          <h5 class="card-title">You have 3 appointments today.</h5>
-          <p class="card-text">Your next appointment is with **Demo Patient** at 11:00 AM.</p>
-          <a href="#" class="btn btn-success">View Full Schedule</a>
+          <h5 class="card-title">Welcome back, Dr. Sutra</h5>
+          <p class="card-text">You have sessions scheduled for today. Check your patient flow and therapy statuses.</p>
+          <a href="{{ url_for('practitioner.schedule') }}" class="btn btn-success">View Full Schedule</a>
         </div>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card shadow-sm mb-4">
-        <div class="card-header">
-          Pending Approvals
-        </div>
+      <div class="card shadow-sm mb-4 border-warning">
+        <div class="card-header bg-warning text-dark">Action Required</div>
         <div class="card-body">
-           <h5 class="card-title">2 New Requests</h5>
-           <p class="card-text">You have 2 new therapy requests to review.</p>
-           <a href="#" class="btn btn-outline-success">Review Requests</a>
+           <h5 class="card-title">Pending Requests</h5>
+           <p class="card-text">New therapy bookings are waiting for your approval.</p>
+           <a href="{{ url_for('practitioner.schedule') }}" class="btn btn-outline-dark">Review Requests</a>
         </div>
       </div>
     </div>
