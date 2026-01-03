@@ -72,3 +72,10 @@ def patient_progress_data(patient_id):
 def view_feedback():
     """New route to view patient feedback comments."""
     return render_template('practitioner/feedback_list.html', feedbacks=MOCK_FEEDBACK)
+
+@practitioner_bp.route('/feedback')
+@practitioner_required
+def view_feedback():
+    """Renders a page showing all patient feedback comments."""
+    # This uses the MOCK_FEEDBACK list we defined earlier
+    return render_template('practitioner/feedback_list.html', feedbacks=MOCK_FEEDBACK)
