@@ -568,33 +568,21 @@ body.loaded .navbar-brand {
         <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AyurSutra Logo Loading">
     </div>
     <header>
+    {% block header %}
     <nav class="navbar fixed-top liquid-glass-nav">
         <div class="container-fluid px-4">
-            {% if g.user %}
-                <div class="d-flex justify-content-between align-items-center w-100">
-                    <a class="navbar-brand navbar-brand-dashboard d-flex align-items-center" href="{{ url_for('main.dashboard') }}">
-                        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AyurSutra Logo" style="height: 50px;">
-                        <span class="ms-2">AyurSutra</span>
-                    </a>
-                    <a href="{{ url_for('auth.logout') }}" class="logout-btn">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </a>
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <a class="navbar-brand" href="{{ url_for('main.index') }}">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AyurSutra Logo" style="height: 65px;">
+                </a>
+                <div class="burger-menu-icon">
+                    <div class="line line1"></div>
+                    <div class="line line2"></div>
+                    <div class="line line3"></div>
                 </div>
-            {% else %}
-                <div class="d-flex justify-content-between align-items-center w-100">
-                    <a class="navbar-brand" href="{{ url_for('main.index') }}">
-                        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AyurSutra Logo" style="height: 65px;">
-                    </a>
-                    <div class="burger-menu-icon">
-                        <div class="line line1"></div>
-                        <div class="line line2"></div>
-                        <div class="line line3"></div>
-                    </div>
-                </div>
-            {% endif %}
+            </div>
         </div>
     </nav>
-    {% if not g.user %}
     <ul class="nav-list">
        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="Home" class="hamburger-logo"></a></li>
        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#therapies">Therapies</a></li>
@@ -604,7 +592,7 @@ body.loaded .navbar-brand {
        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}#contact">Contact</a></li>
        <li class="nav-item" style="margin-top: 2rem;"><div class="cta"><a href="{{ url_for('auth.register') }}" class="btn nav-link">Login / Sign Up</a></div></li>
     </ul>
-    {% endif %}
+    {% endblock %}
 </header>
 
     <main>
