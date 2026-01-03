@@ -35,16 +35,18 @@
 </div>
 
 <script>
-    // This script updates the "Sign in as..." button text when you toggle
-    document.addEventListener('DOMContentLsoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() { // Fixed typo here
         const roleToggle = document.getElementById('roleToggle');
         const roleButtons = roleToggle.querySelectorAll('.role-toggle-btn');
         const submitBtn = document.getElementById('submitBtn');
 
         roleButtons.forEach(button => {
             button.addEventListener('click', function() {
+                // Remove active class from all and add to clicked
                 roleButtons.forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
+                
+                // Update the button text
                 const selectedRole = this.dataset.role;
                 submitBtn.textContent = `Sign in as ${selectedRole}`;
             });
