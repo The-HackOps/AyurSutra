@@ -2,8 +2,23 @@
 
 {% block title %}Register - AyurSutra{% endblock %}
 
+{% block header %}
+<nav class="navbar fixed-top liquid-glass-nav">
+  <div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center w-100">
+      <a class="navbar-brand" href="{{ url_for('main.index') }}">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AyurSutra Logo" style="height: 65px;">
+      </a>
+      <a href="{{ url_for('main.index') }}" class="btn btn-outline-success btn-sm rounded-pill">
+        <i class="fas fa-arrow-left me-1"></i> Back to Home
+      </a>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
 {% block content_full_width %}
-<div class="form-container-centered">
+<div class="form-container-centered" style="margin-top: 100px;">
     <div class="register-card">
         <h3 class="card-title text-center mb-2">Create Your Account</h3>
         <p class="text-muted text-center mb-4">Choose your account type to get started.</p>
@@ -19,7 +34,6 @@
 
         <form method="POST" novalidate>
             {{ form.hidden_tag() }}
-            
             {{ form.role(class="d-none") }}
 
             <div class="row">
@@ -36,23 +50,14 @@
             <div class="mb-3 text-start">
                 {{ form.email.label(class="form-label") }}
                 {{ form.email(class="form-control", placeholder="Enter your email") }}
-                {% for error in form.email.errors %}
-                    <span class="text-danger small">{{ error }}</span>
-                {% endfor %}
             </div>
             <div class="mb-3 text-start">
                 {{ form.password.label(class="form-label") }}
                 {{ form.password(class="form-control", placeholder="Create a password") }}
-                 {% for error in form.password.errors %}
-                    <span class="text-danger small">{{ error }}</span>
-                {% endfor %}
             </div>
             <div class="mb-4 text-start">
                 {{ form.confirm_password.label(class="form-label") }}
                 {{ form.confirm_password(class="form-control", placeholder="Confirm your password") }}
-                 {% for error in form.confirm_password.errors %}
-                    <span class="text-danger small">{{ error }}</span>
-                {% endfor %}
             </div>
             
             <button type="submit" id="submitBtn" class="btn btn-success w-100 mb-2">Create Patient Account</button>
@@ -69,14 +74,12 @@
         const roleInputField = document.querySelector('input[name="role"]');
         const submitBtn = document.getElementById('submitBtn');
 
-        // Function to update UI based on role
         const updateRole = (role) => {
-            roleInputField.value = role;
+            if(roleInputField) roleInputField.value = role;
             const roleCapitalized = role.charAt(0).toUpperCase() + role.slice(1);
             submitBtn.textContent = `Create ${roleCapitalized} Account`;
         };
 
-        // Set initial state
         updateRole('patient');
 
         roleButtons.forEach(button => {
