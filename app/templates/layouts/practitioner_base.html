@@ -1,37 +1,31 @@
 {% extends 'layouts/base.html' %}
 
-{% block content_full_width %}
-<header class="unified-header">
+{% block header %}
+<nav class="navbar fixed-top liquid-glass-nav">
   <div class="container-fluid px-4">
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-center w-100">
       <a class="navbar-brand navbar-brand-dashboard d-flex align-items-center" href="{{ url_for('main.dashboard') }}">
           <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AyurSutra Logo" style="height: 50px;">
-          <span class="ms-2">AyurSutra</span></a>
+          <span class="ms-2" style="color: #2E7D32;">AyurSutra</span>
+      </a>
 
       <div class="header-nav-links">
-  <a class="nav-link {% if request.endpoint == 'main.dashboard' %}active{% endif %}" href="{{ url_for('main.dashboard') }}">
-    <i class="fas fa-home me-1"></i> Dashboard</a>
-
-  <a class="nav-link {% if request.endpoint == 'practitioner.schedule' %}active{% endif %}" href="{{ url_for('practitioner.schedule') }}">
-    <i class="fas fa-calendar-check me-1"></i> Manage Schedule</a>
-
-  <a class="nav-link {% if request.endpoint == 'practitioner.schedule' %}active{% endif %}" href="{{ url_for('practitioner.schedule') }}">
-    <i class="fas fa-users me-1"></i> View Patients</a>
-
-  <a class="nav-link {% if request.endpoint == 'practitioner.view_feedback' %}active{% endif %}" href="{{ url_for('practitioner.view_feedback') }}">
-    <i class="fas fa-chart-bar me-1"></i> Patient Feedback</a>
-
-  <a class="nav-link" href="#"><i class="fas fa-user-md me-1"></i> {{ g.user.first_name }}</a>
-</div>
+        <a class="nav-link {% if request.endpoint == 'main.dashboard' %}active{% endif %}" href="{{ url_for('main.dashboard') }}"><i class="fas fa-home me-1"></i> Dashboard</a>
+        <a class="nav-link {% if request.endpoint == 'practitioner.schedule' %}active{% endif %}" href="{{ url_for('practitioner.schedule') }}"><i class="fas fa-calendar-check me-1"></i> Manage Schedule</a>
+        <a class="nav-link" href="{{ url_for('practitioner.schedule') }}"><i class="fas fa-users me-1"></i> View Patients</a>
+        <a class="nav-link {% if request.endpoint == 'practitioner.view_feedback' %}active{% endif %}" href="{{ url_for('practitioner.view_feedback') }}"><i class="fas fa-chart-bar me-1"></i> Patient Feedback</a>
+      </div>
 
       <a href="{{ url_for('auth.logout') }}" class="logout-btn">
         <i class="fas fa-sign-out-alt"></i> Logout
       </a>
     </div>
   </div>
-</header>
+</nav>
+{% endblock %}
 
-<div class="dashboard-main-content">
+{% block content_full_width %}
+<div class="dashboard-main-content" style="margin-top: 100px;">
     {% block dashboard_content %}{% endblock %}
 </div>
 {% endblock %}
