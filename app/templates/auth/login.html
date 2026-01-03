@@ -2,8 +2,23 @@
 
 {% block title %}Login - AyurSutra{% endblock %}
 
+{% block header %}
+<nav class="navbar fixed-top liquid-glass-nav">
+  <div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center w-100">
+      <a class="navbar-brand" href="{{ url_for('main.index') }}">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AyurSutra Logo" style="height: 65px;">
+      </a>
+      <a href="{{ url_for('main.index') }}" class="btn btn-outline-success btn-sm rounded-pill">
+        <i class="fas fa-arrow-left me-1"></i> Back to Home
+      </a>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
 {% block content_full_width %}
-<div class="form-container-centered">
+<div class="form-container-centered" style="margin-top: 100px;">
     <div class="register-card">
         <h3 class="card-title text-center mb-2">Welcome Back!</h3>
         <p class="text-muted text-center mb-4">Choose your login type to access your account</p>
@@ -35,18 +50,15 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() { // Fixed typo here
+    document.addEventListener('DOMContentLoaded', function() {
         const roleToggle = document.getElementById('roleToggle');
         const roleButtons = roleToggle.querySelectorAll('.role-toggle-btn');
         const submitBtn = document.getElementById('submitBtn');
 
         roleButtons.forEach(button => {
             button.addEventListener('click', function() {
-                // Remove active class from all and add to clicked
                 roleButtons.forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
-                
-                // Update the button text
                 const selectedRole = this.dataset.role;
                 submitBtn.textContent = `Sign in as ${selectedRole}`;
             });
