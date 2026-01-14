@@ -19,9 +19,9 @@
   background-color: #F9F9F7;
   color: #212529;
   overflow-x: hidden;
-  display: flex; /* <-- Add this */
-  flex-direction: column; /* <-- Add this */
-  min-height: 100vh; /* <-- Add this */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
       
       h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; font-weight: 700; color: #2E7D32; }
@@ -46,17 +46,17 @@
         box-shadow: none !important;
       }
       .navbar-brand img {
-  height: 65px; /* Logo height for navbar branding */
+  height: 65px; 
   transition: all 0.3s ease;
 }
       
       .burger-menu-icon {
         cursor: pointer; border: none; background: none; padding: 0;
-        z-index: 1001; /* Ensure it's above the nav-list */
-        margin-right: -15px; /* Move hamburger to the right */
+        z-index: 1001;
+        margin-right: -15px;
       }
       .burger-menu-icon .line { width: 28px; height: 3px; background-color: #fff; margin: 5px 0; transition: all 0.4s ease; border-radius: 2px; }
-      .homepage-nav .burger-menu-icon .line { background-color: #2E7D32; } /* Darker on homepage */
+      .homepage-nav .burger-menu-icon .line { background-color: #2E7D32; } 
       .burger-menu-icon.toggle .line1 { transform: rotate(-45deg) translate(-6px, 6px); }
       .burger-menu-icon.toggle .line2 { opacity: 0; }
       .burger-menu-icon.toggle .line3 { transform: rotate(45deg) translate(-6px, -6px); }
@@ -66,7 +66,7 @@
         background-color: #1a1a1a; display: flex; flex-direction: column;
         align-items: center; justify-content: center; z-index: 1000;
         transition: right 0.6s cubic-bezier(0.77, 0, 0.175, 1);
-        padding-top: 50px; /* Offset for fixed header */
+        padding-top: 50px;
       }
       .nav-list.active { right: 0; }
       .nav-list .nav-item { margin: 1rem 0; list-style: none; opacity: 0; transform: translateX(50px); transition: opacity 0.4s ease, transform 0.4s ease; }
@@ -80,11 +80,11 @@
       .nav-list .nav-link {
         font-size: 1.2rem; text-transform: uppercase; color: #cecece; letter-spacing: 1.5px;
         transition: color 0.3s, font-weight 0.3s, transform 0.3s;
-        display: inline-block; /* Required for transform on hover */
+        display: inline-block;
       }
       .nav-list .nav-link:hover { color: #fff; font-weight: 600; transform: scale(1.05); }
       .nav-list .nav-item .btn {
-        background-color: #FB8C00; /* Distinct color for button */
+        background-color: #FB8C00;
         color: white;
         border-radius: 25px;
         padding: 10px 25px;
@@ -97,68 +97,55 @@
 
       /* --- GENERAL SECTION STYLING --- */
       section {
-          padding: 6rem 0; /* Consistent vertical padding */
-          min-height: calc(100vh - 80px); /* Adjust for header/footer to keep one section in view */
+          padding: 6rem 0;
+          min-height: calc(100vh - 80px);
           display: flex;
           align-items: center;
           justify-content: center;
       }
-      #section1 { /* Hero section */
+      #section1 {
           min-height: 100vh;
       }
       
-/* Find this */
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.07);
 }
 
-/* --- LIQUID GLASS HEADER STYLE --- */
 .liquid-glass-nav {
-    /* Translucent white background */
     background-color: rgba(255, 255, 255, 0.72) !important; 
-    
-    /* The Apple Blur Magic */
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    
-    /* Subtle border and shadow for depth */
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-    
-    /* Ensure it stays on top */
     z-index: 1030;
     transition: all 0.3s ease;
 }
 
-/* Reset main padding so the hero section starts at the very top */
 main {
     padding-top: 0 !important;
 }
 
-/* Ensure the Hero Section fills the screen and centers content */
 #section1 {
-    min-height: 100vh;     /* Full viewport height */
-    display: flex;         /* Use Flexbox */
-    align-items: center;   /* Vertically center */
-    justify-content: center; /* Horizontally center */
-    padding-top: 0;        /* Ensure no extra padding inside pushes it down */
+    min-height: 100vh;
+    display: flex;    
+    align-items: center; 
+    justify-content: center;
+    padding-top: 0;
     margin-top: 0;
 }
 
-/* Ensure anchor links (like #how-it-works) don't land behind the header */
 section {
     scroll-margin-top: 100px;
 }
 
-/* !! ADD THIS NEW BLOCK BELOW !! */
 .panchakarma-card {
-    min-width: 200px;  /* Sets a minimum width */
-    min-height: 300px; /* Sets a minimum height */
+    min-width: 200px;
+    min-height: 300px;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Vertically centers content */
-    align-items: center; /* Horizontally centers content */
+    justify-content: center;
+    align-items: center;
     padding: 1.5rem;
     text-align: center;
     border-radius: 15px;
@@ -167,21 +154,17 @@ section {
 }
       .panchakarma-card:hover, .therapy-card:hover {
         transform: translateY(-8px);
-        box-shadow: 0 10px 25px rgba(46, 125, 50, 0.2), 0 0 0 3px rgba(46, 125, 50, 0.1); /* Green glow + subtle border */
+        box-shadow: 0 10px 25px rgba(46, 125, 50, 0.2), 0 0 0 3px rgba(46, 125, 50, 0.1);
       }
       .panchakarma-card .icon, .therapy-card .icon { font-size: 3rem; margin-bottom: 1rem; }
-      
-      /* Specific card colors for Panchakarma */
       .panchakarma-card.c-green { background-color: #E8F5E9; color: #2E7D32; }
       .panchakarma-card.c-blue { background-color: #E3F2FD; color: #1565C0; }
       .panchakarma-card.c-orange { background-color: #FFF3E0; color: #EF6C00; }
       .panchakarma-card.c-purple { background-color: #F3E5F5; color: #6A1B9A; }
       .panchakarma-card.c-red { background-color: #FFEBEE; color: #C62828; }
-
-      /* Specific card colors for More Therapies */
-      .therapy-card.t-teal { background-color: #E0F2F7; color: #00838F; } /* Shirodhara */
-      .therapy-card.t-amber { background-color: #FFF8E1; color: #FF8F00; } /* Abhyanga */
-      .therapy-card.t-lime { background-color: #F1F8E9; color: #558B2F; } /* Kati Basti */
+      .therapy-card.t-teal { background-color: #E0F2F7; color: #00838F; }
+      .therapy-card.t-amber { background-color: #FFF8E1; color: #FF8F00; }
+      .therapy-card.t-lime { background-color: #F1F8E9; color: #558B2F; } 
 
       /* --- SCROLL ANIMATIONS --- */
       .fade-in-section {
@@ -194,20 +177,18 @@ section {
         transform: translateY(0);
       }
 
-      /* --- FOOTER --- */
       .footer {
   background-color: transparent;
   color: #6c757d;
   padding: 2.5rem 1rem;
   text-align: center;
-  margin-top: 1rem; /* <-- Reduced whitespace */
+  margin-top: 1rem;
 }
       .footer-nav-link:hover { color: #2E7D32; font-weight: 700; transform: scale(1.05); }
       .footer-coded-by { font-size: 1rem; margin-top: 1rem; }
 
-      /* --- Logo in Hamburger Menu --- */
       .nav-list .nav-item .hamburger-logo {
-  height: 85px; /* Bigger hamburger logo */
+  height: 85px;
   width: auto;
   margin-bottom: 1rem;
   transition: transform 0.3s ease;
@@ -229,7 +210,7 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #F9F9F7; /* Matches your light background */
+    background-color: #F9F9F7;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -237,48 +218,42 @@ section {
     transition: opacity 0.75s ease, visibility 0.75s ease;
 }
 .loader-wrapper img {
-    width: 150px; /* Initial large size */
+    width: 150px;
     height: auto;
-    transition: all 1s cubic-bezier(0.77, 0, 0.175, 1); /* Smooth animation */
-    /* These properties will be animated */
+    transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-/* This class is added by JavaScript when loading is done */
 .loader-wrapper.hidden {
     opacity: 0;
     visibility: hidden;
 }
 .loader-wrapper.hidden img {
-    /* Final position and size must match the navbar logo */
     top: 18px;
-    left: 80px; /* Adjust based on container padding */
-    width: 65px; /* Matches navbar logo size */
+    left: 80px; 
+    width: 65px;
     transform: translate(0, 0);
 }
 
-/* Hide the real navbar logo initially, then fade it in */
 .navbar-brand {
     opacity: 0;
-    transition: opacity 0.5s ease 0.5s; /* Fade in after a 0.5s delay */
+    transition: opacity 0.5s ease 0.5s;
 }
 body.loaded .navbar-brand {
     opacity: 1;
 }
-/* --- REGISTER PAGE SPECIFIC STYLES --- */
 .register-page-body {
-    /* This background will match the homepage's animated particle background */
-    background-color: #f0efe9; /* A light, consistent background */
+    background-color: #f0efe9;
 }
 
 .form-container-centered {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 80px); /* Adjust for fixed header/footer if needed */
+    min-height: calc(100vh - 80px);
     padding: 2rem 0;
 }
 
@@ -288,7 +263,7 @@ body.loaded .navbar-brand {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     padding: 2.5rem;
     width: 100%;
-    max-width: 650px; /* Slightly wider for better toggle display */
+    max-width: 650px; 
     text-align: center;
 }
 
@@ -322,7 +297,7 @@ body.loaded .navbar-brand {
 }
 
 .role-toggle-btn.active {
-    background-color: #2E7D32; /* Green for active */
+    background-color: #2E7D32;
     color: white;
     box-shadow: 0 3px 10px rgba(46, 125, 50, 0.3);
 }
@@ -331,11 +306,10 @@ body.loaded .navbar-brand {
     background-color: #e0e0e0;
     color: #333;
 }
-/* --- DASHBOARD-SPECIFIC NAVBAR STYLES --- */
 .navbar-brand-dashboard {
   display: flex;
   align-items: center;
-  gap: 10px; /* Space between logo and text */
+  gap: 10px;
 }
 .navbar-brand-dashboard span {
   font-size: 1.5rem;
@@ -364,21 +338,17 @@ body.loaded .navbar-brand {
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   transform: translateY(-2px);
 }
-/* --- UNIFIED DASHBOARD HEADER STYLES --- */
 .dashboard-body {
     background: linear-gradient(-45deg, #e8f5e9, #fdfbf4, #e3f2fd, #f3e5f5);
     background-size: 400% 400%;
     animation: gradient 20s ease infinite;
 }
 
-/* The new unified header */
 .unified-header {
     padding: 0.5rem 0;
     position: sticky;
     top: 0;
-    z-index: 1030; /* High z-index to stay on top */
-
-    /* Frosted Glass Effect */
+    z-index: 1030;
     background-color: rgba(255, 255, 255, 0.7);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
@@ -403,12 +373,11 @@ body.loaded .navbar-brand {
     align-items: center;
 }
 .unified-header .logout-btn:hover {
-    background-color: #FFEBEE; /* Light red background */
-    border-color: #D32F2F;    /* Stronger red border */
-    color: #D32F2F;           /* Stronger red text */
+    background-color: #FFEBEE;
+    border-color: #D32F2F; 
+    color: #D32F2F; 
 }
 
-/* Centered Navigation Links */
 .header-nav-links {
     flex-grow: 1;
     display: flex;
@@ -433,7 +402,6 @@ body.loaded .navbar-brand {
     font-weight: 700;
 }
 
-/* Main Content Area */
 .dashboard-main-content {
     padding: 2rem;
     width: 100%;
@@ -442,15 +410,13 @@ body.loaded .navbar-brand {
     position: relative;
 }
 
-/* Footer on Dashboard */
 .footer.dashboard-footer {
     margin-top: 2rem;
     padding: 1.5rem 1rem;
     background-color: transparent;
 }
-/* --- FOOTER --- */
 .footer {
-    background-color: #f8f9fa; /* A light, clean background */
+    background-color: #f8f9fa;
     padding: 4rem 0;
     border-top: 1px solid #e0e0e0;
 }
@@ -487,7 +453,6 @@ body.loaded .navbar-brand {
 .nav-list.active { right: 0; }
 .nav-list .nav-item { margin: 1rem 0; list-style: none; }
 .nav-list .nav-link { font-size: 1.2rem; text-transform: uppercase; color: #cecece; letter-spacing: 1.5px; }
-/* --- DASHBOARD STYLES --- */
 .dashboard-body {
     background-color: #f0f2f5;
 }
@@ -519,17 +484,15 @@ body.loaded .navbar-brand {
     max-width: 1600px;
     margin: 1rem auto;
 }
-/* --- NEW SITE FOOTER --- */
 .site-footer {
-    background-color: transparent; /* Merges with page background */
+    background-color: transparent; 
     color: #6c757d;
     padding: 2.5rem 1rem;
     text-align: center;
     font-family: 'Poppins', sans-serif;
     font-size: 0.9rem;
-    border-top: 1px solid #e0e0e0; /* A subtle separator line */
+    border-top: 1px solid #e0e0e0;
 }
-/* This is the previous design for homepage footer links */
 .footer-nav-link {
     color: #6c757d;
     text-decoration: none;
@@ -542,20 +505,19 @@ body.loaded .navbar-brand {
 }
 .footer-nav-link:hover {
     color: var(--ayur-green);
-    transform: scale(1.05); /* The hover animation */
+    transform: scale(1.05);
 }
 
-/* Style for the Github Link in Footer */
 .github-link {
-    color: inherit;       /* Inherits the grey color from the parent <p> */
-    text-decoration: none; /* Removes the default underline */
-    font-weight: 600;      /* Makes it slightly bold */
+    color: inherit;   
+    text-decoration: none;
+    font-weight: 600;   
     transition: color 0.3s ease;
 }
 
 .github-link:hover {
-    color: #2E7D32;        /* Changes to AyurSutra Green on hover */
-    text-decoration: underline; /* Adds underline on hover for clarity */
+    color: #2E7D32;    
+    text-decoration: underline;
 }
 
     </style>
@@ -627,7 +589,7 @@ body.loaded .navbar-brand {
         {% endif %}
         <div class="footer-coded-by">
             <p class="mb-0">
-                Made by <a href="https://github.com/The-HackOps" target="_blank" rel="noopener noreferrer" class="github-link">Team HackOps</a>
+                Made by <a href="https://github.com/The-HackOps/AyurSutra/" target="_blank" rel="noopener noreferrer" class="github-link">Team HackOps</a>
             </p>
         </div>
     </div>
@@ -637,30 +599,25 @@ body.loaded .navbar-brand {
     
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-
-        // --- !! ADD THIS NEW LOADER LOGIC !! ---
         window.addEventListener('load', () => {
             const loader = document.querySelector('.loader-wrapper');
 
-            // Add a small delay for a better visual effect
             setTimeout(() => {
-                // Start the animation by adding the 'hidden' class
                 loader.classList.add('hidden');
-                // Add a class to the body to fade in the real logo
                 document.body.classList.add('loaded');
-            }, 500); // 500ms delay
+            }, 500);
         });
             // Hamburger Menu Logic
             const burgerMenu = document.querySelector('.burger-menu-icon');
             const navList = document.querySelector('.nav-list');
-            const navLinks = document.querySelectorAll('.nav-list .nav-item'); // Select items for animation delay
+            const navLinks = document.querySelectorAll('.nav-list .nav-item');
 
             if (burgerMenu && navList) {
                 burgerMenu.addEventListener('click', () => {
                     navList.classList.toggle('active');
                     burgerMenu.classList.toggle('toggle');
                 });
-                navLinks.forEach(item => { // Changed to 'item'
+                navLinks.forEach(item => {
                     const link = item.querySelector('.nav-link');
                     if (link) {
                         link.addEventListener('click', () => {
@@ -671,22 +628,17 @@ body.loaded .navbar-brand {
                 });
             }
 
-            // Scroll Animation Logic
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
                     } else {
-                        // Optionally remove 'visible' class when out of view
-                        // entry.target.classList.remove('visible');
                     }
                 });
-            }, { threshold: 0.15 }); // Adjust threshold as needed
+            }, { threshold: 0.15 });
             document.querySelectorAll('.fade-in-section').forEach(section => {
                 observer.observe(section);
             });
-
-            // Make sure first section is immediately visible (if it's the hero)
             const firstSection = document.querySelector('#section1');
             if (firstSection) {
                 firstSection.classList.add('visible');
