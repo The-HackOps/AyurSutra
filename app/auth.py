@@ -5,7 +5,6 @@ from .forms import RegistrationForm
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-# --- MOCK DATA (Fake Database) ---
 MOCK_USERS = {
     1: {
         'id': 1, 
@@ -21,7 +20,7 @@ MOCK_USERS = {
         'password': '123', 
         'first_name': 'Ayur', 
         'last_name': 'Sutra', 
-        'role': 'practitioner' # Changed from 'doctor' to 'practitioner' to match main.py
+        'role': 'practitioner'
     }
 }
 
@@ -36,7 +35,6 @@ def load_logged_in_user():
 @auth_bp.route('/register', methods=('GET', 'POST'))
 def register():
     form = RegistrationForm()
-    # If the form is valid, we just pretend to save and redirect
     if form.validate_on_submit():
         flash('Registration successful! (Prototype Mode: Please log in with patient@test.com)', 'success')
         return redirect(url_for('auth.login'))
@@ -51,7 +49,6 @@ def login():
         error = None
         user = None
 
-        # Check against MOCK data instead of Database
         if email == 'patient@test.com' and password == '123':
             user = MOCK_USERS[1]
         elif email == 'doctor@test.com' and password == '123':
