@@ -68,5 +68,4 @@ def patient_progress_data(patient_id):
 @practitioner_required
 def view_feedback():
     """Renders the list of all patient wellness reports."""
-    # This single function now serves the endpoint used in practitioner_base.html
     return render_template('practitioner/feedback_list.html', feedbacks=MOCK_FEEDBACKS)
