@@ -3,16 +3,12 @@
 from flask import (
     Blueprint, render_template, session, redirect, url_for, g
 )
-# We removed the decorator code and added this import:
 from app.decorators import login_required 
 
 main_bp = Blueprint('main', __name__)
 
-# --- Our Main Routes ---
-
 @main_bp.route('/')
 def index():
-    # This will be our new homepage
     return render_template('index.html')
 
 @main_bp.route('/dashboard')
