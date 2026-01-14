@@ -4,7 +4,6 @@ from datetime import datetime
 
 practitioner_bp = Blueprint('practitioner', __name__, url_prefix='/practitioner')
 
-# --- MOCK DATA FOR DOCTOR ---
 MOCK_APPOINTMENTS = [
     {
         'id': 101,
@@ -26,7 +25,6 @@ MOCK_APPOINTMENTS = [
     }
 ]
 
-# Mock Feedback for the doctor to "View"
 MOCK_FEEDBACKS = [
     {
         'patient_name': 'John Doe',
