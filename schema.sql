@@ -1,11 +1,8 @@
--- Create the database (if it doesn't exist)
+-- This file can be used when Database is needed
 CREATE DATABASE IF NOT EXISTS ayursutra_db;
 
--- Use the newly created database
 USE ayursutra_db;
 
--- 1. Users Table
--- Stores login info and the user's role
 CREATE TABLE IF NOT EXISTS Users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(120) UNIQUE NOT NULL,
@@ -16,8 +13,6 @@ CREATE TABLE IF NOT EXISTS Users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 2. Patients Table
--- Stores extra info just for patients
 CREATE TABLE IF NOT EXISTS Patients (
     user_id INT PRIMARY KEY,
     phone VARCHAR(20),
@@ -25,8 +20,6 @@ CREATE TABLE IF NOT EXISTS Patients (
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
--- 3. Practitioners Table
--- Stores extra info just for practitioners
 CREATE TABLE IF NOT EXISTS Practitioners (
     user_id INT PRIMARY KEY,
     specialty VARCHAR(100),
@@ -34,8 +27,6 @@ CREATE TABLE IF NOT EXISTS Practitioners (
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
--- 4. Therapies Table
--- Stores all available treatments
 CREATE TABLE IF NOT EXISTS Therapies (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -43,8 +34,6 @@ CREATE TABLE IF NOT EXISTS Therapies (
     duration_minutes INT NOT NULL
 );
 
--- 5. Appointments Table
--- This is the main table for scheduling
 CREATE TABLE IF NOT EXISTS Appointments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     patient_id INT NOT NULL,
@@ -58,8 +47,6 @@ CREATE TABLE IF NOT EXISTS Appointments (
     FOREIGN KEY (therapy_id) REFERENCES Therapies(id)
 );
 
--- 6. Precautions Table
--- Stores all pre- and post-procedure precautions
 CREATE TABLE IF NOT EXISTS Precautions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -67,8 +54,6 @@ CREATE TABLE IF NOT EXISTS Precautions (
     type ENUM('pre', 'post') NOT NULL
 );
 
--- 7. Therapy_Precautions Table
--- This links therapies and precautions (a many-to-many relationship)
 CREATE TABLE IF NOT EXISTS Therapy_Precautions (
     therapy_id INT NOT NULL,
     precaution_id INT NOT NULL,
@@ -77,8 +62,6 @@ CREATE TABLE IF NOT EXISTS Therapy_Precautions (
     FOREIGN KEY (precaution_id) REFERENCES Precautions(id) ON DELETE CASCADE
 );
 
--- 8. Feedback Table
--- Stores patient feedback for the innovative features
 CREATE TABLE IF NOT EXISTS Feedback (
     id INT AUTO_INCREMENT PRIMARY KEY,
     appointment_id INT UNIQUE NOT NULL,
