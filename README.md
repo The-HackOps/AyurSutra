@@ -86,7 +86,7 @@ These instructions are for local development/testing only (prototype). The proje
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/The-HackOps/AyurSutra.git
+git clone https://github.com/DevKumar005/AyurSutra.git
 cd AyurSutra
 
 # 2. Create a virtual environment
